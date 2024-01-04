@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
     <title>Todo List Application</title>
@@ -55,9 +54,53 @@
         button {
             cursor: pointer;
         }
+
+        .task-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+        .task-header {
+            background-color: #007bff;
+            border-radius: 8px 8px 0 0;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .task-list {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .task-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-details {
+            flex: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-delete-btn {
+            margin-left: 10px;
+        }
     </style>
 </head>
-<!-- ... rest of your HTML ... -->
 
 <body>
 <div class="container">
@@ -83,34 +126,27 @@
                     <option value="LOW">Low</option>
                 </select>
             </div>
-
-
         </div>
 
         <button type="submit" wicket:id="addTaskButton" class="btn btn-primary">Add Task</button>
     </form>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Description</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Completed</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody wicket:id="tasks">
-        <tr>
-            <td wicket:id="description"></td>
-            <td wicket:id="dueDate"></td>
-            <td wicket:id="priority"></td>
-            <td><input type="checkbox" wicket:id="completed" /></td>
-            <td><button type="submit" wicket:id="deleteTaskButton" class="btn btn-danger btn-sm">Delete</button></td>
-        </tr>
-        </tbody>
-    </table>
+    <div wicket:id="tasks" class="task-list">
+        <div  class="task-card">
+            <div class="task-header">Task Details</div>
+            <div class="task-item">
+                <div class="task-details">
+                    <p wicket:id="description">Task Description</p>
+                    <small class="text-muted" wicket:id="priority">Priority: High</small><br/>
+                    <small class="text-muted" wicket:id="dueDate">Due Date: 2022-01-01</small>
+                </div>
+                <div class="task-actions">
+                    <input type="checkbox" wicket:id="completed" class="mr-2"/> Completed
+                    <button type="submit" wicket:id="deleteTaskButton" class="btn btn-danger btn-sm task-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
