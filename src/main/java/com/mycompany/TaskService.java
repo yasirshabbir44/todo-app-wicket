@@ -1,10 +1,11 @@
 package com.mycompany;
 
 // TaskService.java
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskService {
+public class TaskService implements Serializable {
     private List<Task> tasks;
 
     public TaskService() {

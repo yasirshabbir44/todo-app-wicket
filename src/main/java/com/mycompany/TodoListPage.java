@@ -1,18 +1,21 @@
 package com.mycompany;
 
 // TodoListPage.java
+import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TodoListPage extends WebPage {
+public class TodoListPage extends WebPage implements Serializable {
 
     private TaskService taskService;
 
@@ -33,6 +36,7 @@ public class TodoListPage extends WebPage {
             }
         });
         add(taskForm);
+
 
         // Display the list of tasks
         add(new ListView<Task>("tasks", new PropertyModel<>(taskService, "tasks")) {

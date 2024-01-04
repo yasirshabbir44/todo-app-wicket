@@ -1,5 +1,6 @@
 package com.mycompany;
 
+import de.agilecoders.wicket.core.Bootstrap;
 import org.apache.wicket.csp.CSPDirective;
 import org.apache.wicket.csp.CSPDirectiveSrcValue;
 import org.apache.wicket.markup.html.WebPage;
@@ -29,7 +30,7 @@ public class WicketApplication extends WebApplication
 	public void init()
 	{
 		super.init();
-
+		Bootstrap.install(this);
 		// needed for the styling used by the quickstart
 		getCspSettings().blocking()
 			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
