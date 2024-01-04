@@ -108,6 +108,11 @@
 
     <form wicket:id="taskForm" class="mb-3">
         <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" wicket:id="title" class="form-control" required />
+        </div>
+
+        <div class="form-group">
             <label for="description">Description:</label>
             <input type="text" wicket:id="description" class="form-control" required />
         </div>
@@ -136,10 +141,12 @@
             <div class="task-header">Task Details</div>
             <div class="task-item">
                 <div class="task-details">
-                    <p wicket:id="description">Task Description</p>
+                    <small class="text-muted" wicket:id="title">Title</small><br/>
                     <small class="text-muted" wicket:id="priority">Priority: High</small><br/>
                     <small class="text-muted" wicket:id="dueDate">Due Date: 2022-01-01</small>
+                    <p wicket:id="description">Task Description</p>
                 </div>
+
                 <div class="task-actions">
                     <input type="checkbox" wicket:id="completed" class="mr-2"/> Completed
                     <button type="submit" wicket:id="deleteTaskButton" class="btn btn-danger btn-sm task-delete-btn">Delete</button>

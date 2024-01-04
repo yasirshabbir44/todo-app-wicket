@@ -23,7 +23,8 @@ public class TodoListPage extends WebPage implements Serializable {
         taskService = new TaskService();
 
         // Form for adding new tasks
-        Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task("New Task", LocalDate.now(), Priority.MEDIUM)));
+        Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task("New Task","Description", LocalDate.now(), Priority.MEDIUM,false)));
+        taskForm.add(new TextField<>("title"));
         taskForm.add(new TextField<>("description"));
         taskForm.add(new TextField<>("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
@@ -31,8 +32,9 @@ public class TodoListPage extends WebPage implements Serializable {
             @Override
             public void onSubmit() {
                 Task newTask = taskForm.getModelObject();
+                System.out.println(newTask);
                 taskService.addTask(newTask);
-                taskForm.setModelObject(new Task("New Task", LocalDate.now(), Priority.MEDIUM)); // Reset the form
+                taskForm.setModelObject(new Task("New Task","description", LocalDate.now(), Priority.MEDIUM,false)); // Reset the form
             }
         });
         add(taskForm);
@@ -43,6 +45,7 @@ public class TodoListPage extends WebPage implements Serializable {
             @Override
             protected void populateItem(ListItem<Task> item) {
                 Task task = item.getModelObject();
+                item.add(new Label("title", task.getTitle()));
                 item.add(new Label("description", task.getDescription()));
                 item.add(new Label("dueDate", task.getDueDate().toString()));
                 item.add(new Label("priority", task.getPriority().toString()));
