@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Todo List Application</title>
+</head>
+<body>
+<h1>Todo List</h1>
+
+<form wicket:id="taskForm">
+    <label>Description:</label>
+    <input type="text" wicket:id="description" />
+
+    <label>Due Date:</label>
+    <input type="text" wicket:id="dueDate" />
+
+    <label>Priority:</label>
+    <select wicket:id="priority">
+        <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
+    </select>
+
+    <button type="submit" wicket:id="addTaskButton">Add Task</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Completed</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody wicket:id="tasks">
+    <tr>
+        <td wicket:id="description"></td>
+        <td wicket:id="dueDate"></td>
+        <td wicket:id="priority"></td>
+        <td><input type="checkbox" wicket:id="completed" /></td>
+        <td><button type="submit" wicket:id="deleteTaskButton">Delete</button></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
