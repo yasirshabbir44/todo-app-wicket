@@ -1,40 +1,23 @@
 package com.mycompany;
 
 // Task.java
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
 
+@ToString
+@AllArgsConstructor
+@Data
 public class Task implements Serializable {
+    private String title;
     private String description;
     private LocalDate dueDate;
     private Priority priority;
     private boolean completed;
 
-    public Task(String description, LocalDate dueDate, Priority priority) {
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.completed = false;
-    }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
 }
