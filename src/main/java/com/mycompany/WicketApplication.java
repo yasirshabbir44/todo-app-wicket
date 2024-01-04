@@ -31,11 +31,15 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 		Bootstrap.install(this);
-		// needed for the styling used by the quickstart
 		getCspSettings().blocking()
-			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
-			.add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
-			.add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
+				.add(CSPDirective.STYLE_SRC, "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css")
+				.add(CSPDirective.SCRIPT_SRC, "https://code.jquery.com/jquery-3.5.1.slim.min.js");
+
+		// needed for the styling used by the quickstart
+//		getCspSettings().blocking()
+//			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
+//			.add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
+//			.add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
 
 		// add your configuration here
 	}
