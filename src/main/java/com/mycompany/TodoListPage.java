@@ -26,7 +26,7 @@ public class TodoListPage extends WebPage implements Serializable {
         Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task("New Task", LocalDate.now(), Priority.MEDIUM)));
         taskForm.add(new TextField<>("description"));
         taskForm.add(new TextField<>("dueDate"));
-        taskForm.add(new ListChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
+        taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
         taskForm.add(new Button("addTaskButton") {
             @Override
             public void onSubmit() {
