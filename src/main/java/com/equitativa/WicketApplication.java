@@ -1,8 +1,7 @@
-package com.mycompany;
+package com.equitativa;
 
+import com.equitativa.home.HomePage;
 import de.agilecoders.wicket.core.Bootstrap;
-import org.apache.wicket.csp.CSPDirective;
-import org.apache.wicket.csp.CSPDirectiveSrcValue;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -10,7 +9,7 @@ import org.apache.wicket.protocol.http.WebApplication;
  * Application object for your web application.
  * If you want to run this application without deploying, run the Start class.
  * 
- * @see com.mycompany.Start#main(String[])
+ * @see com.equitativa.Start#main(String[])
  */
 public class WicketApplication extends WebApplication
 {

@@ -1,5 +1,6 @@
-package com.mycompany;
+package com.equitativa;
 
+import com.equitativa.home.HomePage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

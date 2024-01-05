@@ -1,16 +1,17 @@
-package com.mycompany;
+package com.equitativa.todo;
 
 // TodoListPage.java
-import com.mycompany.base.BasePage;
-import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert;
-import org.apache.wicket.markup.html.WebPage;
+import com.equitativa.model.Priority;
+import com.equitativa.model.Task;
+import com.equitativa.TaskService;
+import com.equitativa.base.BasePage;
+import com.equitativa.home.HomePage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import java.io.Serializable;

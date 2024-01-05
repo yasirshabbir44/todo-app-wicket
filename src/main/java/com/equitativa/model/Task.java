@@ -1,4 +1,4 @@
-package com.mycompany;
+package com.equitativa.model;
 
 // Task.java
 import lombok.AllArgsConstructor;

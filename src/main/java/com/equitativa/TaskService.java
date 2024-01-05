@@ -1,6 +1,8 @@
-package com.mycompany;
+package com.equitativa;
 
 // TaskService.java
+import com.equitativa.model.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

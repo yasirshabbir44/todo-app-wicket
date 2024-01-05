@@ -1,4 +1,4 @@
-package com.mycompany.base;
+package com.equitativa.base;
 
 import org.apache.wicket.markup.head.CssReferenceHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
