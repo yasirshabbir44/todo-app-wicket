@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Dream House Realty Management</title>
+    <style nonce="ch3XzM30_iiTwfzW_wwJuzfz">
+        /* Custom Styles */
+        body {
+            background-color: #f8f9fa;
+        }
+           header {
+            background-color: #007bff;
+            padding: 1rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tbody tr:hover {
+            background-color: #f2f5f7;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .task-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+        .task-header {
+            background-color: #007bff;
+            border-radius: 8px 8px 0 0;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .task-list {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .task-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-details {
+            flex: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-delete-btn {
+            margin-left: 10px;
+        }
+           footer {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Task Management</h1>
+</header>
+
+
+<main>
+    <wicket:child />
+</main>
+
+
+<footer>
+    &copy; 2024 Your Task Management App. All rights reserved.
+</footer>
+
+</body>
+</html>

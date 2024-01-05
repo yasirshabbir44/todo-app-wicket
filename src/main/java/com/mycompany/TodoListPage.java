@@ -1,6 +1,7 @@
 package com.mycompany;
 
 // TodoListPage.java
+import com.mycompany.base.BasePage;
 import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -16,7 +17,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TodoListPage extends WebPage implements Serializable {
+public class TodoListPage extends BasePage implements Serializable {
 
     private TaskService taskService;
 
