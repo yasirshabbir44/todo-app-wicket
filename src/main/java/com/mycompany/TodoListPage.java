@@ -5,6 +5,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -38,6 +39,12 @@ public class TodoListPage extends WebPage implements Serializable {
             }
         });
         add(taskForm);
+        add(new Link<Void>("redirectToHomePage") {
+            @Override
+            public void onClick() {
+                setResponsePage(HomePage.class);
+            }
+        });
 
 
         // Display the list of tasks

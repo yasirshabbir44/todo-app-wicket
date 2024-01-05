@@ -13,8 +13,14 @@
         /* Custom Styles */
         body {
             background-color: #f8f9fa;
-            padding: 20px;
         }
+           header {
+            background-color: #007bff;
+            padding: 1rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
 
         .container {
             max-width: 800px;
@@ -99,11 +105,27 @@
         .task-delete-btn {
             margin-left: 10px;
         }
+           footer {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
-<div class="container">
+<header>
+    <h1>Task Management</h1>
+</header>
+<main class="container">
+
+    <div class="text-right">
+        <a wicket:id="redirectToHomePage" class="btn btn-primary">Go Back to Home Page</a>
+    </div>
     <h1 class="mb-4">Todo List</h1>
 
     <form wicket:id="taskForm" class="mb-3">
@@ -138,11 +160,10 @@
 
     <div wicket:id="tasks" class="task-list">
         <div  class="task-card">
-            <div class="task-header">Task Details</div>
+            <div class="task-header" wicket:id="title">Title</div>
             <div class="task-item">
                 <div class="task-details">
-                    <small class="text-muted" wicket:id="title">Title</small><br/>
-                    <small class="text-muted" wicket:id="priority">Priority: High</small><br/>
+                    <small class="text-muted" wicket:id="priority">Priority: High</small>
                     <small class="text-muted" wicket:id="dueDate">Due Date: 2022-01-01</small>
                     <p wicket:id="description">Task Description</p>
                 </div>
@@ -154,6 +175,9 @@
             </div>
         </div>
     </div>
-</div>
+</main>
+<footer>
+    &copy; 2024 Your Task Management App. All rights reserved.
+</footer>
 </body>
 </html>
