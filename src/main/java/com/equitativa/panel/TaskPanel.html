@@ -1,0 +1,15 @@
+<wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
+    <div class="d-flex justify-content-center">
+        <div class="card mt-2 mb-2 shadow-sm" style="width: 20rem;">
+            <div class="card-body">
+                <a class="card-title" href="#" wicket:id="link"><h5 wicket:id="name"></h5></a>
+                <p class="card-text" wicket:id="description"></p>
+                <div class="d-flex justify-content-between">
+<!--                    <span class="badge bg-secondary">Assigned to <span wicket:id="collaborator"></span></span>-->
+                    <span class="badge bg-secondary" wicket:id="label"></span>
+                </div>
+            </div>
+            <div class="card-footer text-muted" wicket:id="createdAt"></div>
+        </div>
+    </div>
+</wicket:panel>

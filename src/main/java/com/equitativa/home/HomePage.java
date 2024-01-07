@@ -1,6 +1,6 @@
 package com.equitativa.home;
 
-import com.equitativa.todo.TodoListPage;
+import com.equitativa.todo.TaskListPage;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
@@ -24,7 +24,7 @@ public class HomePage extends WebPage {
 		add(new Link<Void>("redirectToAnotherPage") {
 			@Override
 			public void onClick() {
-				setResponsePage(TodoListPage.class);
+				setResponsePage(TaskListPage.class);
 			}
 		});
 	}

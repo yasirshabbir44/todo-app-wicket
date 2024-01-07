@@ -1,5 +1,4 @@
-
-<wicket:extend>
+<wicket:extend xmlns:wicket="http://www.w3.org/1999/xhtml">
 
 <main class="container">
 
@@ -38,22 +37,37 @@
         <button type="submit" wicket:id="addTaskButton" class="btn btn-primary">Add Task</button>
     </form>
 
-    <div wicket:id="tasks" class="task-list">
-        <div  class="task-card">
-            <div class="task-header" wicket:id="title">Title</div>
-            <div class="task-item">
-                <div class="task-details">
-                    <small class="text-muted" wicket:id="priority">Priority: High</small>
-                    <small class="text-muted" wicket:id="dueDate">Due Date: 2022-01-01</small>
-                    <p wicket:id="description">Task Description</p>
-                </div>
+<!--    <div wicket:id="tasks" class="task-list">-->
+<!--        <div  class="task-card">-->
+<!--            <div class="task-header" wicket:id="title">Title</div>-->
+<!--            <div class="task-item">-->
+<!--                <div class="task-details">-->
+<!--                    <small class="text-muted" wicket:id="priority">Priority: High</small>-->
+<!--                    <small class="text-muted" wicket:id="dueDate">Due Date: 2022-01-01</small>-->
+<!--                    <p wicket:id="description">Task Description</p>-->
+<!--                </div>-->
 
-                <div class="task-actions">
-                    <input type="checkbox" wicket:id="completed" class="mr-2"/> Completed
-                    <button type="submit" wicket:id="deleteTaskButton" class="btn btn-danger btn-sm task-delete-btn">Delete</button>
+<!--                <div class="task-actions">-->
+<!--                    <input type="checkbox" wicket:id="completed" class="mr-2"/> Completed-->
+<!--                    <button type="submit" wicket:id="deleteTaskButton" class="btn btn-danger btn-sm task-delete-btn">Delete</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</main>
+
+
+    <!-- Activity Statuses -->
+    <div class="container-fluid px-5 pb-5">
+        <div class="row">
+            <div class="col" wicket:id="priorityItem">
+                <div class="status-header text-center py-2 fw-bold">
+                    <span wicket:id="enumLabel"></span>
+                </div>
+                <div class="status-activities p-3">
+                    <div wicket:id="taskList"></div>
                 </div>
             </div>
         </div>
     </div>
-</main>
 </wicket:extend>
