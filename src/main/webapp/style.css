@@ -66,3 +66,16 @@ h3 {
 	font-size:24pt;
 	color:#092E67;
 }
+
+.status-header{
+   background: #027bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.status-activities {
+    border-right: 1px double #e5e5e5;
+    border-bottom: 1px double #e5e5e5;
+    border-left: 1px double #e5e5e5;
+}

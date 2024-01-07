@@ -77,7 +77,7 @@ public class TaskListPage extends BasePage {
         // Form for adding new tasks
         Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
         taskForm.add(new TextField<>("title"));
-        taskForm.add(new TextField<>("description"));
+        taskForm.add( new TextArea<>("description"));
         taskForm.add(new TextField<>("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
         taskForm.add(new Button("addTaskButton") {
@@ -94,12 +94,6 @@ public class TaskListPage extends BasePage {
             }
         });
         add(taskForm);
-        add(new Link<Void>("redirectToHomePage") {
-            @Override
-            public void onClick() {
-                setResponsePage(HomePage.class);
-            }
-        });
 
 
 //        // Display the list of tasks

@@ -32,13 +32,5 @@ public class WicketApplication extends WebApplication
 		Bootstrap.install(this);
 		// Disable Content Security Policy for Testing Purposes
 		getCspSettings().blocking().disabled();
-
-		// needed for the styling used by the quickstart
-//		getCspSettings().blocking()
-//			.add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
-//			.add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
-//			.add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
-
-		// add your configuration here
 	}
 }

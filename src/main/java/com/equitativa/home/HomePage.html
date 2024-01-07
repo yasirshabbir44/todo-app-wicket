@@ -1,108 +1,44 @@
-<!DOCTYPE html>
-<html xmlns:wicket="http://wicket.apache.org">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Task Management</title>
-	<!-- Include Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
-        }
 
-        nav {
-            background-color: #444;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
-        }
+<wicket:extend xmlns:wicket="http://www.w3.org/1999/xhtml">
 
-        section {
-            padding: 20px;
-        }
+	<section id="home">
+		<h2>Welcome to Dream House Realty</h2>
+		<p>Find your dream home with us. We specialize in helping you discover the perfect property that meets your needs and aspirations.</p>
+	</section>
 
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-<header>
-	<h1 wicket:id="pageTitle">Task Management</h1>
+	<section id="properties">
+		<h2>Featured Properties</h2>
+		<p>Explore our latest listings and discover the ideal home for you and your family.</p>
+		<!-- Add property listings here -->
+	</section>
 
-	<p>Your Dream Home Awaits</p>
-</header>
+	<section id="about">
+		<h2>About Us</h2>
+		<p>At Dream House Realty, we are committed to providing exceptional real estate services. Our team of experienced professionals is here to guide you through the buying or selling process.</p>
+	</section>
 
-<nav>
-	<a href="#home">Home</a> |
-	<a wicket:id="redirectToAnotherPage">Activities</a> |
-	<a href="#about">About Us</a> |
-	<a href="#contact">Contact Us</a>
-</nav>
+	<section id="contact">
+		<h2>Contact Us</h2>
+		<p>Get in touch with our team to discuss your real estate needs. We are here to help you find the perfect property.</p>
+		<!-- Add contact form or contact details here -->
+	</section>
 
-<section id="home">
-	<h2>Welcome to Dream House Realty</h2>
-	<p>Find your dream home with us. We specialize in helping you discover the perfect property that meets your needs and aspirations.</p>
-</section>
+	<main class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="task-container">
+					<h2>Task Details</h2>
+					<p>Sample Task: Complete Wicket Tutorial</p>
+					<!-- Add more HTML components for task details -->
 
-<section id="properties">
-	<h2>Featured Properties</h2>
-	<p>Explore our latest listings and discover the ideal home for you and your family.</p>
-	<!-- Add property listings here -->
-</section>
+					<!--				<div class="text-right">-->
+					<!--					<a wicket:id="redirectToAnotherPage" class="btn btn-primary">Go to ToDo List</a>-->
+					<!--				</div>-->
+				</div>
 
-<section id="about">
-	<h2>About Us</h2>
-	<p>At Dream House Realty, we are committed to providing exceptional real estate services. Our team of experienced professionals is here to guide you through the buying or selling process.</p>
-</section>
-
-<section id="contact">
-	<h2>Contact Us</h2>
-	<p>Get in touch with our team to discuss your real estate needs. We are here to help you find the perfect property.</p>
-	<!-- Add contact form or contact details here -->
-</section>
-
-<main class="container">
-	<div class="row">
-		<div class="col-md-8 offset-md-2">
-			<div class="task-container">
-				<h2>Task Details</h2>
-				<p wicket:id="taskDescription">Sample Task: Complete Wicket Tutorial</p>
-				<!-- Add more HTML components for task details -->
-
-<!--				<div class="text-right">-->
-<!--					<a wicket:id="redirectToAnotherPage" class="btn btn-primary">Go to ToDo List</a>-->
-<!--				</div>-->
+				<!-- Add more task containers or components for an elegant landing page -->
 			</div>
-
-			<!-- Add more task containers or components for an elegant landing page -->
 		</div>
-	</div>
-</main>
-
-<footer>
-	&copy; 2024 Your Task Management App. All rights reserved.
-</footer>
-
-<!-- Include Bootstrap JS (optional, if you need JavaScript features) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+	</main>
+</wicket:extend>

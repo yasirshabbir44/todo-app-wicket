@@ -2,9 +2,6 @@
 
 <main class="container">
 
-    <div class="text-right">
-        <a wicket:id="redirectToHomePage" class="btn btn-primary">Go Back to Home Page</a>
-    </div>
     <h1 class="mb-4">Todo List</h1>
 
     <form wicket:id="taskForm" class="mb-3">
@@ -13,10 +10,6 @@
             <input type="text" wicket:id="title" class="form-control" required />
         </div>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <input type="text" wicket:id="description" class="form-control" required />
-        </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -33,6 +26,11 @@
                 </select>
             </div>
         </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea wicket:id="description" class="form-control" required ></textarea>
+        </div>
+
 
         <button type="submit" wicket:id="addTaskButton" class="btn btn-primary">Add Task</button>
     </form>

@@ -33,16 +33,21 @@ public class TaskPanel extends Panel {
         addTaskLabel(task);
     }
 
-    private void addTaskLabel(Task task) {
-        var taskLabel = new Label("label", task.getTitle());
-        //taskLabel.add(new AttributeAppender("style", "background-color:" + task.getLabel().getColor() + " !important;"));
-        add(taskLabel);
-    }
-
     private void addTaskNameAndLink(Task task) {
         var taskLink = new WebMarkupContainer("link");
         taskLink.add(new AttributeModifier("href", "/task/view?id=" + task.getId()));
         add(taskLink);
         taskLink.add(new Label("name", task.getTitle()));
+    }
+
+    private void addTaskLabel(Task task) {
+        var activityLabel = new Label("label",task.getPriority().toString());
+        AttributeAppender attributeAppender = switch (task.getPriority()) {
+            case LOW -> new AttributeAppender("style", "background-color: green !important;");
+            case MEDIUM -> new AttributeAppender("style", "background-color: yellow !important;");
+            case HIGH -> new AttributeAppender("style", "background-color: red !important;");
+        };
+        activityLabel.add(attributeAppender);
+        add(activityLabel);
     }
 }
