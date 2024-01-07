@@ -7,6 +7,7 @@ import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
 import com.equitativa.home.HomePage;
 import com.equitativa.panel.TaskPanel;
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.link.Link;
@@ -78,7 +79,7 @@ public class TaskListPage extends BasePage {
         Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
         taskForm.add(new TextField<>("title"));
         taskForm.add( new TextArea<>("description"));
-        taskForm.add(new TextField<>("dueDate"));
+        taskForm.add( new DateTextField("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
         taskForm.add(new Button("addTaskButton") {
             @Override

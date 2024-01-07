@@ -43,8 +43,8 @@ public class TaskPanel extends Panel {
     private void addTaskLabel(Task task) {
         var activityLabel = new Label("label",task.getPriority().toString());
         AttributeAppender attributeAppender = switch (task.getPriority()) {
-            case LOW -> new AttributeAppender("style", "background-color: green !important;");
-            case MEDIUM -> new AttributeAppender("style", "background-color: yellow !important;");
+            case LOW -> new AttributeAppender("style", "background-color: blue !important;");
+            case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");
             case HIGH -> new AttributeAppender("style", "background-color: red !important;");
         };
         activityLabel.add(attributeAppender);
