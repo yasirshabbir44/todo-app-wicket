@@ -19,7 +19,7 @@ public class Task implements Serializable {
     private String description;
     private LocalDate dueDate;
     private Priority priority;
-    private boolean completed;
+    private Status status;
 
 
 }

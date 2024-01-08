@@ -1,5 +1,6 @@
 package com.equitativa.panel;
 
+import com.equitativa.model.Status;
 import com.equitativa.model.Task;
 import lombok.AllArgsConstructor;
 import org.apache.wicket.AttributeModifier;
@@ -8,6 +9,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 
 public class TaskPanel extends Panel {
 
@@ -30,6 +32,22 @@ public class TaskPanel extends Panel {
         add(new Label("description",  task.getDescription()));
         //add(new Label("collaborator", task.getCollaborator().getDisplayName()));
         add(new Label("createdAt", task.getDueDate()));
+//        add(new Label("statusCompleted", task.getStatus().equals(Status.COMPLETED)));
+
+        WebMarkupContainer conditionalDiv = new WebMarkupContainer("statusCompleted", taskModel) {
+            @Override
+            public boolean isVisible() {
+                // Get the model object and check the condition
+                Task task = taskModel.getObject();
+                return task.getStatus().equals(Status.COMPLETED);
+            }
+        };
+        conditionalDiv.add(AttributeModifier.append("class", "completed-task"));
+        add(conditionalDiv);
+
+
+
+
         addTaskLabel(task);
     }
 

@@ -2,6 +2,7 @@ package com.equitativa;
 
 // TaskService.java
 import com.equitativa.model.Priority;
+import com.equitativa.model.Status;
 import com.equitativa.model.Task;
 
 import java.io.Serializable;
@@ -16,9 +17,21 @@ public class TaskService implements Serializable {
     public TaskService() {
         this.tasks = new ArrayList<>();
 
-        tasks.add(Task.builder().id(UUID.randomUUID()).title("ABC").description("abc").dueDate(LocalDate.now()).priority(Priority.HIGH).build());
-        tasks.add(Task.builder().id(UUID.randomUUID()).title("ABC").description("abc").dueDate(LocalDate.now()).priority(Priority.LOW).build());
-        tasks.add(Task.builder().id(UUID.randomUUID()).title("ABC").description("abc").dueDate(LocalDate.now()).priority(Priority.HIGH).build());
+        Task.TaskBuilder taskBuilder = Task.builder()
+                .id(UUID.randomUUID())
+                .title("ipsum dolor sit amet")
+                .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                .dueDate(LocalDate.now())
+                .priority(Priority.HIGH)
+                .status(Status.PENDING);
+        tasks.add(taskBuilder.build());
+        tasks.add(taskBuilder.build());
+        tasks.add(taskBuilder.priority(Priority.MEDIUM).build());
+        tasks.add(taskBuilder.priority(Priority.MEDIUM).build());
+        tasks.add(taskBuilder.priority(Priority.LOW).build());
+        tasks.add(taskBuilder.priority(Priority.LOW).build());
+        tasks.add(taskBuilder.status(Status.COMPLETED).build());
+        tasks.add(taskBuilder.status(Status.COMPLETED).build());
     }
 
     public List<Task> getTasks() {

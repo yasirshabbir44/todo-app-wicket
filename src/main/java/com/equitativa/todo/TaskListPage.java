@@ -5,21 +5,18 @@ import com.equitativa.model.Priority;
 import com.equitativa.model.Task;
 import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
-import com.equitativa.home.HomePage;
+import com.equitativa.model.Status;
 import com.equitativa.panel.TaskPanel;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +28,7 @@ public class TaskListPage extends BasePage {
 
     private TaskService taskService;
 
-    private transient Map<Priority, List<Task>> tasksByStatusId;
+    private transient Map<Status, List<Task>> tasksByStatusId;
 
 
     @Override
@@ -44,24 +41,17 @@ public class TaskListPage extends BasePage {
     private void loadActivitiesByStatus() {
         tasksByStatusId = taskService.getTasks()
                 .stream()
-                .collect(groupingBy((task) -> task.getPriority()));
+                .collect(groupingBy((task) -> task.getStatus()));
     }
 
 
     private void populateStatusData() {
-        var priorities = List.of(Priority.HIGH,Priority.MEDIUM,Priority.LOW);
-        var priorityList = new ListView<>("priorityItem", priorities) {
+        var statuses = List.of(Status.PENDING,Status.COMPLETED);
+        var priorityList = new ListView<>("priorityItem", statuses) {
             @Override
-            protected void populateItem(ListItem<Priority> item) {
-                Priority priority = item.getModelObject();
-                Label label = new Label("enumLabel", new PropertyModel<>(priority, "name"));
-                Label statusLabel = new Label("statusLabel", new PropertyModel<>(priority, "name"));
-                AttributeAppender attributeAppender = switch (priority) {
-                    case LOW -> new AttributeAppender("style", "background-color: blue !important;");
-                    case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");
-                    case HIGH -> new AttributeAppender("style", "background-color: red !important;");
-                };
-                statusLabel.add(attributeAppender);
+            protected void populateItem(ListItem<Status> item) {
+                Status status = item.getModelObject();
+                Label label = new Label("enumLabel", new PropertyModel<>(status, "name"));
                 item.add(label);
                 populateActivitiesForStatus(item);
             }
@@ -70,9 +60,9 @@ public class TaskListPage extends BasePage {
 
     }
 
-    private void populateActivitiesForStatus(ListItem<Priority> taskStatusListItem) {
-        Priority priority = taskStatusListItem.getModel().getObject();
-        var tasks = tasksByStatusId.getOrDefault(priority, Collections.emptyList());
+    private void populateActivitiesForStatus(ListItem<Status> taskStatusListItem) {
+        Status status = taskStatusListItem.getModel().getObject();
+        var tasks = tasksByStatusId.getOrDefault(status, Collections.emptyList());
         var taskList = new RepeatingView("taskList");
 
         for (var task : tasks) {
