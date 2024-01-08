@@ -7,6 +7,7 @@ import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
 import com.equitativa.home.HomePage;
 import com.equitativa.panel.TaskPanel;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -52,11 +53,21 @@ public class TaskListPage extends BasePage {
         var priorityList = new ListView<>("priorityItem", priorities) {
             @Override
             protected void populateItem(ListItem<Priority> item) {
-                item.add(new Label("enumLabel", new PropertyModel<>(item.getModelObject(), "name")));
+                Priority priority = item.getModelObject();
+                Label label = new Label("enumLabel", new PropertyModel<>(priority, "name"));
+                Label statusLabel = new Label("statusLabel", new PropertyModel<>(priority, "name"));
+                AttributeAppender attributeAppender = switch (priority) {
+                    case LOW -> new AttributeAppender("style", "background-color: blue !important;");
+                    case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");
+                    case HIGH -> new AttributeAppender("style", "background-color: red !important;");
+                };
+                statusLabel.add(attributeAppender);
+                item.add(label);
                 populateActivitiesForStatus(item);
             }
         };
         add(priorityList);
+
     }
 
     private void populateActivitiesForStatus(ListItem<Priority> taskStatusListItem) {
@@ -96,24 +107,16 @@ public class TaskListPage extends BasePage {
         });
         add(taskForm);
 
-
-//        // Display the list of tasks
-//        add(new ListView<Task>("tasks", new PropertyModel<>(taskService, "tasks")) {
-//            @Override
-//            protected void populateItem(ListItem<Task> item) {
-//                Task task = item.getModelObject();
-//                item.add(new Label("title", task.getTitle()));
-//                item.add(new Label("description", task.getDescription()));
-//                item.add(new Label("dueDate", task.getDueDate().toString()));
-//                item.add(new Label("priority", task.getPriority().toString()));
-//                item.add(new CheckBox("completed", new PropertyModel<>(task, "completed")));
-//                item.add(new Button("deleteTaskButton") {
-//                    @Override
-//                    public void onSubmit() {
-//                        taskService.deleteTask(task);
-//                    }
-//                });
-//            }
-//        });
     }
+
+//    private void addTaskLabel(Priority priority) {
+//        var activityLabel = new Label("label",priority.toString());
+//        AttributeAppender attributeAppender = switch (priority) {
+//            case LOW -> new AttributeAppender("style", "background-color: blue !important;");
+//            case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");
+//            case HIGH -> new AttributeAppender("style", "background-color: red !important;");
+//        };
+//        activityLabel.add(attributeAppender);
+//        add(activityLabel);
+//    }
 }
