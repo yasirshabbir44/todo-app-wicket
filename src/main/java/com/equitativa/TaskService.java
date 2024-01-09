@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class TaskService implements Serializable {
-    private List<Task> tasks;
+    private static List<Task> tasks;
 
     public TaskService() {
         this.tasks = new ArrayList<>();
@@ -24,14 +24,14 @@ public class TaskService implements Serializable {
                 .dueDate(LocalDate.now())
                 .priority(Priority.HIGH)
                 .status(Status.PENDING);
-        tasks.add(taskBuilder.build());
-        tasks.add(taskBuilder.build());
-        tasks.add(taskBuilder.priority(Priority.MEDIUM).build());
-        tasks.add(taskBuilder.priority(Priority.MEDIUM).build());
-        tasks.add(taskBuilder.priority(Priority.LOW).build());
-        tasks.add(taskBuilder.priority(Priority.LOW).build());
-        tasks.add(taskBuilder.status(Status.COMPLETED).build());
-        tasks.add(taskBuilder.status(Status.COMPLETED).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).priority(Priority.MEDIUM).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).priority(Priority.MEDIUM).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).priority(Priority.LOW).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).priority(Priority.LOW).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
+        tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
     }
 
     public List<Task> getTasks() {
@@ -42,7 +42,13 @@ public class TaskService implements Serializable {
         tasks.add(task);
     }
 
-    public void deleteTask(Task task) {
+
+    public void updateTask(Task task) {
         tasks.remove(task);
+        tasks.add(task);
+    }
+
+    public void deleteTask(Task task) {
+        tasks = tasks.stream().filter(t -> t.getId().toString().equals(task.getId().toString())).toList();
     }
 }

@@ -2,11 +2,14 @@ package com.equitativa.panel;
 
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
-import lombok.AllArgsConstructor;
+import com.equitativa.todo.TaskListPage;
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -29,24 +32,23 @@ public class TaskPanel extends Panel {
     private void populateTaskData() {
         Task task = taskModel.getObject();
         addTaskNameAndLink(task);
-        add(new Label("description",  task.getDescription()));
-        //add(new Label("collaborator", task.getCollaborator().getDisplayName()));
+        add(new Label("description", task.getDescription()));
         add(new Label("createdAt", task.getDueDate()));
-//        add(new Label("statusCompleted", task.getStatus().equals(Status.COMPLETED)));
 
-        WebMarkupContainer conditionalDiv = new WebMarkupContainer("statusCompleted", taskModel) {
+
+        CheckBox statusCompleted = new CheckBox("statusCompleted", Model.of(task.getStatus().equals(Status.COMPLETED)));
+        // Add Ajax behavior to the checkbox
+        statusCompleted.add(new AjaxFormComponentUpdatingBehavior("click") {
             @Override
-            public boolean isVisible() {
-                // Get the model object and check the condition
-                Task task = taskModel.getObject();
-                return task.getStatus().equals(Status.COMPLETED);
+            protected void onUpdate(AjaxRequestTarget target) {
+                // Handle the click event
+                task.setStatus(statusCompleted.getValue().equals("true") ? Status.COMPLETED : Status.PENDING);
+                findParent(TaskListPage.class).updateTask(task);
+                target.appendJavaScript("window.location.reload();");
             }
-        };
-        conditionalDiv.add(AttributeModifier.append("class", "completed-task"));
-        add(conditionalDiv);
+        });
 
-
-
+        add(statusCompleted);
 
         addTaskLabel(task);
     }

@@ -1,25 +1,22 @@
 <wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
     <style>
-         .completed-task {
-            text-decoration: line-through; /* Add a line-through effect for completed tasks */
-            color: #808080; /* Adjust the color as needed for completed tasks */
-        }
     </style>
     <div class="d-flex justify-content-center" >
         <div class="card mt-2 mb-2 shadow-sm" style="width: 100%;">
-            <label class="container"  wicket:id="statusCompleted">DONE
-                <input type="checkbox" checked="checked" disabled>
+            <label class="container">Done
+                <input type="checkbox" wicket:id="statusCompleted">
                 <span class="checkmark"></span>
             </label>
             <div class="card-body ">
                 <a class="card-title" href="#" wicket:id="link"><h5 wicket:id="name"></h5></a>
                 <p class="card-text" wicket:id="description"></p>
+
                 <div class="d-flex justify-content-between">
-                    <!--                    <span class="badge bg-secondary">Assigned to <span wicket:id="collaborator"></span></span>-->
                     <span class="badge bg-secondary" wicket:id="label"></span>
                 </div>
             </div>
-            <div class="card-footer text-muted" wicket:id="createdAt"></div>
+            <div class="card-footer text-muted" wicket:id="createdAt">
+            </div>
         </div>
     </div>
 </wicket:panel>

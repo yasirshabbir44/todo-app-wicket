@@ -1,13 +1,13 @@
 package com.equitativa.todo;
 
 // TodoListPage.java
-import com.equitativa.model.Priority;
-import com.equitativa.model.Task;
+
 import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
+import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
+import com.equitativa.model.Task;
 import com.equitativa.panel.TaskPanel;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -44,20 +44,36 @@ public class TaskListPage extends BasePage {
                 .collect(groupingBy((task) -> task.getStatus()));
     }
 
+    public TaskListPage() {
+        taskService = new TaskService();
 
-    private void populateStatusData() {
-        var statuses = List.of(Status.PENDING,Status.COMPLETED);
-        var priorityList = new ListView<>("priorityItem", statuses) {
+        // Form for adding new tasks
+        Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
+        taskForm.add(new TextField<>("title"));
+        taskForm.add( new TextArea<>("description"));
+        taskForm.add( new DateTextField("dueDate"));
+        taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
+        taskForm.add(new Button("addTaskButton") {
             @Override
-            protected void populateItem(ListItem<Status> item) {
-                Status status = item.getModelObject();
-                Label label = new Label("enumLabel", new PropertyModel<>(status, "name"));
-                item.add(label);
-                populateActivitiesForStatus(item);
-            }
-        };
-        add(priorityList);
+            public void onSubmit() {
+                Task newTask = taskForm.getModelObject();
+                newTask.setId(UUID.randomUUID());
+                newTask.setStatus(Status.PENDING);
+                System.out.println(newTask);
+                taskService.addTask(newTask);
+                taskForm.setModelObject(new Task()); // Reset the form
 
+                loadActivitiesByStatus();
+                //populateStatusData();
+            }
+        });
+        add(taskForm);
+
+    }
+
+    public void updateTask(Task task) {
+        taskService.updateTask(task);
+        loadActivitiesByStatus();
     }
 
     private void populateActivitiesForStatus(ListItem<Status> taskStatusListItem) {
@@ -73,29 +89,18 @@ public class TaskListPage extends BasePage {
         taskStatusListItem.add(taskList);
     }
 
-    public TaskListPage() {
-        taskService = new TaskService();
-
-        // Form for adding new tasks
-        Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
-        taskForm.add(new TextField<>("title"));
-        taskForm.add( new TextArea<>("description"));
-        taskForm.add( new DateTextField("dueDate"));
-        taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
-        taskForm.add(new Button("addTaskButton") {
+    private void populateStatusData() {
+        var statuses = List.of(Status.PENDING, Status.COMPLETED);
+        var priorityList = new ListView<>("priorityItem", statuses) {
             @Override
-            public void onSubmit() {
-                Task newTask = taskForm.getModelObject();
-                newTask.setId(UUID.randomUUID());
-                System.out.println(newTask);
-                taskService.addTask(newTask);
-                taskForm.setModelObject(new Task()); // Reset the form
-
-                loadActivitiesByStatus();
-                //populateStatusData();
+            protected void populateItem(ListItem<Status> item) {
+                Status status = item.getModelObject();
+                Label label = new Label("enumLabel", new PropertyModel<>(status, "name"));
+                item.add(label);
+                populateActivitiesForStatus(item);
             }
-        });
-        add(taskForm);
+        };
+        add(priorityList);
 
     }
 
