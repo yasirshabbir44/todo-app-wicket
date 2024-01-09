@@ -1,18 +1,18 @@
 <wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
-    <style>
-    </style>
-    <div class="d-flex justify-content-center" >
+
+    <div class="d-flex justify-content-center">
         <div class="card mt-2 mb-2 shadow-sm" style="width: 100%;">
             <label class="container">Done
                 <input type="checkbox" wicket:id="statusCompleted">
                 <span class="checkmark"></span>
             </label>
-            <div class="card-body ">
+            <div class="card-body">
                 <a class="card-title" href="#" wicket:id="link"><h5 wicket:id="name"></h5></a>
                 <p class="card-text" wicket:id="description"></p>
 
                 <div class="d-flex justify-content-between">
                     <span class="badge bg-secondary" wicket:id="label"></span>
+                    <!-- Add the delete button with a link or action -->
                 </div>
             </div>
             <div class="card-footer text-muted" wicket:id="createdAt">

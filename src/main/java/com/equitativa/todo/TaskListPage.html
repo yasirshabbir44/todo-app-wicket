@@ -10,6 +10,23 @@
     }
 
     function showAddTaskButton() {
+
+      var title = $('#title').val();
+      var dueDate = $('#dueDate').val();
+      var priority = $('#priority').val();
+      var description = $('#description').val();
+
+      if (title && dueDate && priority && description) {
+        var myDiv = document.getElementById('taskForm');
+        myDiv.style.display = 'none';
+
+        var createTaskButton = document.getElementById('createTaskButton');
+        createTaskButton.style.visibility = 'visible';
+      }
+
+    }
+
+    function resetTaskButton() {
       var myDiv = document.getElementById('taskForm');
       myDiv.style.display = 'none';
 
@@ -17,6 +34,16 @@
       createTaskButton.style.visibility = 'visible';
 
     }
+
+     // Activate the datepicker
+      $(document).ready(function () {
+        $('.input-group.date').datepicker({
+          format: 'dd/mm/yyyy', // You can adjust the format as needed
+          autoclose: true,
+          todayHighlight: true
+        });
+      });
+
 
 
   </script>
@@ -93,20 +120,26 @@
     }
   </style>
 
-  <div id="taskForm" class="container-fluid status-activities">
+  <div id="taskForm" class="container-fluid status-activities mt-5 border rounded p-4 bg-light">
+
     <form wicket:id="taskForm" class="mb-3">
       <div class="form-group">
-        <label for="title">Title:</label>
+        <label for="title" class="font-weight-bold">Title:</label>
         <input type="text" wicket:id="title" class="form-control" required />
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="dueDate">Due Date:</label>
-          <input wicket:id="dueDate" type="text" class="form-control" />
+          <label for="dueDate" class="font-weight-bold">Due Date:</label>
+          <div class="input-group date">
+            <input wicket:id="dueDate" type="text" class="form-control" />
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+            </div>
+          </div>
         </div>
 
         <div class="form-group col-md-6">
-          <label for="priority">Priority:</label>
+          <label for="priority" class="font-weight-bold">Priority:</label>
           <select wicket:id="priority" class="form-control">
             <option value="HIGH">High</option>
             <option value="MEDIUM">Medium</option>
@@ -115,21 +148,18 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="description">Description:</label>
+        <label for="description" class="font-weight-bold">Description:</label>
         <textarea wicket:id="description" class="form-control" required></textarea>
       </div>
       <div class="form-row">
-
-        <div class="form-group col-md-10"></div>
-        <div class="form-group col-md-1">
-          <button type="submit" wicket:id="addTaskButton" onclick="showAddTaskButton()" class="btn btn-primary">Add
-            Task</button>
-        </div>
-        <div class="form-group col-md-1">
-          <button type="reset" onclick="showAddTaskButton()" class="btn">Cancel</button>
+        <div class="form-group col-md-12 text-right">
+          <button type="submit" wicket:id="addTaskButton" class="btn btn-primary">Add Task</button>
+          <button type="reset" onclick="resetTaskButton()" class="btn btn-secondary ml-2">Cancel</button>
         </div>
       </div>
     </form>
+
+
   </div>
 
   <br> <br>
@@ -137,15 +167,16 @@
     style="margin-left: 90%;" class="btn btn-outline-dark px-4 py-2"> Create Task</a>
 
 
+
   <br> <br>
   <!-- Activity Statuses -->
   <div class="container-fluid">
     <div class="row">
       <div class="col" wicket:id="priorityItem">
-        <div class="status-header text-center py-2 fw-bold">
+        <div class="status-header text-center py-2 fw-bold bg-primary text-white">
           <span wicket:id="enumLabel"></span>
         </div>
-        <div class="status-activities p-3">
+        <div class="status-activities p-3 border rounded">
           <div wicket:id="taskList"></div>
         </div>
       </div>

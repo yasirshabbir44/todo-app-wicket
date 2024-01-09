@@ -28,6 +28,8 @@ public abstract class BasePage extends WebPage {
         response.render(JavaScriptReferenceHeaderItem.forUrl(POPPER_MIN_JS));
         response.render(JavaScriptReferenceHeaderItem.forUrl(DIST_JS_BOOTSTRAP_MIN_JS));
         response.render(CssReferenceHeaderItem.forUrl(MAIN_CSS_URL));
+        response.render(CssReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"));
+        response.render(JavaScriptReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"));
     }
 
     public BasePage(){

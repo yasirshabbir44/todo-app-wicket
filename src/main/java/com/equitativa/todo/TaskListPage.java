@@ -62,9 +62,7 @@ public class TaskListPage extends BasePage {
                 System.out.println(newTask);
                 taskService.addTask(newTask);
                 taskForm.setModelObject(new Task()); // Reset the form
-
                 loadActivitiesByStatus();
-                //populateStatusData();
             }
         });
         add(taskForm);

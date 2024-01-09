@@ -6,6 +6,7 @@ import com.equitativa.todo.TaskListPage;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -47,6 +48,14 @@ public class TaskPanel extends Panel {
                 target.appendJavaScript("window.location.reload();");
             }
         });
+
+//        add(new AjaxLink<Void>("deleteButton") {
+//            @Override
+//            public void onClick(AjaxRequestTarget target) {
+//                // Add logic to handle the deletion here
+//                // You can update the UI, remove the panel, etc.
+//            }
+//        });
 
         add(statusCompleted);
 
