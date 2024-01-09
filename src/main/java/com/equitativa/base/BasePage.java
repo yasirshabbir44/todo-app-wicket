@@ -30,6 +30,9 @@ public abstract class BasePage extends WebPage {
         response.render(CssReferenceHeaderItem.forUrl(MAIN_CSS_URL));
         response.render(CssReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"));
         response.render(JavaScriptReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"));
+
+        response.render(CssReferenceHeaderItem.forUrl("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"));
+
     }
 
     public BasePage(){

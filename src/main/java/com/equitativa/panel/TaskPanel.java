@@ -11,6 +11,7 @@ import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -49,14 +50,24 @@ public class TaskPanel extends Panel {
             }
         });
 
-//        add(new AjaxLink<Void>("deleteButton") {
-//            @Override
-//            public void onClick(AjaxRequestTarget target) {
-//                // Add logic to handle the deletion here
-//                // You can update the UI, remove the panel, etc.
-//            }
-//        });
+        // Edit button
+        add(new Link<Void>("editButton") {
+            @Override
+            public void onClick() {
+                // Placeholder for edit action, replace with actual logic
 
+                // Implement your logic for handling the edit action
+                // For example, redirect to an edit page with the task ID
+               // setResponsePage(new EditTaskPage(task.getId()));
+            }
+        });
+
+        // Delete button
+        add(new Link<Void>("deleteButton") {
+            @Override
+            public void onClick() {
+            }
+        });
         add(statusCompleted);
 
         addTaskLabel(task);
