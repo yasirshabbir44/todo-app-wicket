@@ -79,3 +79,37 @@ h3 {
     border-bottom: 1px double #e5e5e5;
     border-left: 1px double #e5e5e5;
 }
+/* Section Styles */
+section {
+    padding: 80px 0;
+}
+
+/* Property Card Styles */
+.property-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+.property-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.property-details h4 {
+    color: #007bff;
+}
+
+.property-details p {
+    color: #6c757d;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+}

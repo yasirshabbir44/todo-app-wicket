@@ -27,6 +27,7 @@ import static java.util.stream.Collectors.groupingBy;
 public class TaskListPage extends BasePage {
 
     private TaskService taskService;
+    private  Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
 
     private transient Map<Status, List<Task>> tasksByStatusId;
 
@@ -48,7 +49,7 @@ public class TaskListPage extends BasePage {
         taskService = new TaskService();
 
         // Form for adding new tasks
-        Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
+
         taskForm.add(new TextField<>("title"));
         taskForm.add( new TextArea<>("description"));
         taskForm.add( new DateTextField("dueDate"));
