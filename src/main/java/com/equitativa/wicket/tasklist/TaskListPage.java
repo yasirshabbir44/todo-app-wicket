@@ -1,13 +1,15 @@
-package com.equitativa.todo;
+package com.equitativa.wicket.tasklist;
 
 // TodoListPage.java
 
 import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
+import com.equitativa.hibernate.PersonService;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
-import com.equitativa.panel.TaskPanel;
+import com.equitativa.wicket.taskpanel.TaskPanel;
+import com.google.inject.Inject;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -26,6 +28,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class TaskListPage extends BasePage {
 
+
+    @Inject
+    private PersonService userService;
     private TaskService taskService;
     private  Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
 
@@ -47,8 +52,8 @@ public class TaskListPage extends BasePage {
 
     public TaskListPage() {
         taskService = new TaskService();
-
         // Form for adding new tasks
+
 
         taskForm.add(new TextField<>("title"));
         taskForm.add( new TextArea<>("description"));
@@ -71,8 +76,10 @@ public class TaskListPage extends BasePage {
     }
 
     public void updateTask(Task task) {
+        userService.getAllUsers();
         taskService.updateTask(task);
         loadActivitiesByStatus();
+
     }
 
     private void populateActivitiesForStatus(ListItem<Status> taskStatusListItem) {

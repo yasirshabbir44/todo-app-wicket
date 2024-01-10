@@ -1,8 +1,10 @@
 package com.equitativa;
 
-import com.equitativa.home.HomePage;
 import com.equitativa.temp.Temp;
+import com.google.inject.Injector;
 import de.agilecoders.wicket.core.Bootstrap;
+import jakarta.inject.Inject;
+import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -14,9 +16,14 @@ import org.apache.wicket.protocol.http.WebApplication;
  */
 public class WicketApplication extends WebApplication
 {
-	/**
-	 * @see org.apache.wicket.Application#getHomePage()
-	 */
+	private final Injector injector;
+
+	@Inject
+	public WicketApplication(Injector injector) {
+		this.injector = injector;
+	}
+
+
 	@Override
 	public Class<? extends WebPage> getHomePage()
 	{
@@ -30,6 +37,8 @@ public class WicketApplication extends WebApplication
 	public void init()
 	{
 		super.init();
+		// Enable GUICE CDI
+		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, injector, false));
 		Bootstrap.install(this);
 		// Disable Content Security Policy for Testing Purposes
 		getCspSettings().blocking().disabled();

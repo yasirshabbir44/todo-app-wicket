@@ -1,7 +1,7 @@
 package com.equitativa.base;
 
-import com.equitativa.home.HomePage;
-import com.equitativa.todo.TaskListPage;
+import com.equitativa.wicket.home.HomePage;
+import com.equitativa.wicket.tasklist.TaskListPage;
 import org.apache.wicket.markup.head.CssReferenceHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;

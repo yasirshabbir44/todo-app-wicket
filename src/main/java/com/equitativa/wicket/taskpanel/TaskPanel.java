@@ -1,12 +1,11 @@
-package com.equitativa.panel;
+package com.equitativa.wicket.taskpanel;
 
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
-import com.equitativa.todo.TaskListPage;
+import com.equitativa.wicket.tasklist.TaskListPage;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
