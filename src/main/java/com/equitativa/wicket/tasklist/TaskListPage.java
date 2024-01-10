@@ -72,6 +72,7 @@ public class TaskListPage extends BasePage implements Serializable {
                 newTask.setId(UUID.randomUUID());
                 newTask.setStatus(Status.PENDING);
                 System.out.println(newTask);
+                taskService.save(newTask);
                // taskService.addTask(newTask);
                 taskForm.setModelObject(new Task()); // Reset the form
                 loadActivitiesByStatus();
