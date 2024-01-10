@@ -8,6 +8,8 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 
+import java.io.Serializable;
+
 /**
  * A base page class to be used as a parent for the pages we're implementing.
  * This would do some common page configuration, such as adding bootstrap.

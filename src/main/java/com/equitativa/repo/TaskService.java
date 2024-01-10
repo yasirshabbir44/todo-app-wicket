@@ -1,10 +1,11 @@
-package com.equitativa;
+package com.equitativa.repo;
 
-// TaskService.java
+import com.equitativa.model.Person;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
-import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
+import jakarta.inject.Inject;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,14 +14,42 @@ import java.util.List;
 import java.util.UUID;
 
 public class TaskService implements Serializable {
-    private static List<Task> tasks;
+
+    private final TaskRepository taskRepository;
 
     @Inject
-    com.equitativa.repo.TaskService taskService;
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
-    public TaskService() {
-        this.tasks = new ArrayList<>();
+    public Task getTask(UUID id) {
+        return taskRepository.findById(id);
+    }
 
+    public List<Task> getAllTasks() {
+        return taskRepository.getTaskList();
+    }
+
+    public void save(List<Task> task){
+        taskRepository.save(task);
+    }
+
+    public void update(Task task){
+
+        taskRepository.update(task,task.getId());
+    }
+
+
+    @Transactional
+    public void save(Task task){
+        taskRepository.save(task);
+    }
+
+
+    @Transactional
+    public void testData(){
+
+            List<Task> tasks = new ArrayList<>();
         Task.TaskBuilder taskBuilder = Task.builder()
                 .id(UUID.randomUUID())
                 .title("ipsum dolor sit amet")
@@ -37,24 +66,12 @@ public class TaskService implements Serializable {
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
 
-      //  taskService.sa
-    }
+          //  tasks.forEach(taskRepository::save);
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
+        Task task = taskBuilder.id(UUID.randomUUID()).build();
+        for (Task t : tasks) {
+            taskRepository.save(t);
+        }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-
-    public void updateTask(Task task) {
-        tasks.remove(task);
-        tasks.add(task);
-    }
-
-    public void deleteTask(Task task) {
-        tasks = tasks.stream().filter(t -> t.getId().toString().equals(task.getId().toString())).toList();
-    }
+        }
 }

@@ -4,12 +4,14 @@ package com.equitativa.wicket.tasklist;
 
 import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
-import com.equitativa.hibernate.PersonService;
+import com.equitativa.repo.PersonService;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
+import com.equitativa.repo.TaskRepository;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -19,6 +21,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +29,14 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class TaskListPage extends BasePage {
-
+public class TaskListPage extends BasePage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Inject
-    private PersonService userService;
-    private TaskService taskService;
+    private transient  PersonService userService;
+
+    @Inject
+    private transient  com.equitativa.repo.TaskService taskService;
     private  Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
 
     private transient Map<Status, List<Task>> tasksByStatusId;
@@ -44,17 +49,18 @@ public class TaskListPage extends BasePage {
         populateStatusData();
     }
 
+    @Transactional
     private void loadActivitiesByStatus() {
-        tasksByStatusId = taskService.getTasks()
+        tasksByStatusId = taskService.getAllTasks()
                 .stream()
                 .collect(groupingBy((task) -> task.getStatus()));
+
     }
 
     public TaskListPage() {
-        taskService = new TaskService();
         // Form for adding new tasks
 
-
+       // taskService.testData();
         taskForm.add(new TextField<>("title"));
         taskForm.add( new TextArea<>("description"));
         taskForm.add( new DateTextField("dueDate"));
@@ -66,7 +72,7 @@ public class TaskListPage extends BasePage {
                 newTask.setId(UUID.randomUUID());
                 newTask.setStatus(Status.PENDING);
                 System.out.println(newTask);
-                taskService.addTask(newTask);
+               // taskService.addTask(newTask);
                 taskForm.setModelObject(new Task()); // Reset the form
                 loadActivitiesByStatus();
             }
@@ -76,8 +82,7 @@ public class TaskListPage extends BasePage {
     }
 
     public void updateTask(Task task) {
-        userService.getAllUsers();
-        taskService.updateTask(task);
+        taskService.update(task);
         loadActivitiesByStatus();
 
     }
@@ -110,14 +115,4 @@ public class TaskListPage extends BasePage {
 
     }
 
-//    private void addTaskLabel(Priority priority) {
-//        var activityLabel = new Label("label",priority.toString());
-//        AttributeAppender attributeAppender = switch (priority) {
-//            case LOW -> new AttributeAppender("style", "background-color: blue !important;");
-//            case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");
-//            case HIGH -> new AttributeAppender("style", "background-color: red !important;");
-//        };
-//        activityLabel.add(attributeAppender);
-//        add(activityLabel);
-//    }
 }
