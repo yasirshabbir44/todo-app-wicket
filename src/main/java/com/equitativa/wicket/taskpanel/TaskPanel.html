@@ -1,11 +1,21 @@
 <wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
 
-    <div class="d-flex justify-content-center">
-        <div class="card mt-2 mb-2 shadow-sm" style="width: 100%;">
-            <label class="container">Done
-                <input type="checkbox" wicket:id="statusCompleted">
-                <span class="checkmark"></span>
-            </label>
+    <div class="d-flex justify-content-center mt-3 mb-3">
+        <div class="card mt-2 mb-2 shadow-sm" style="    width: 40px;
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 10px;">
+            <div class="d-flex align-items-center">
+                <label class="container">Done
+                    <input type="checkbox" wicket:id="statusCompleted">
+                    <span class="checkmark"></span>
+                </label>
+
+                <div class="ml-auto">
+                    <!-- User image on the right -->
+                    <img src="img/img_1.png" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                </div>
+            </div>
             <div class="card-body">
                 <a class="card-title" href="#" wicket:id="link"><h5 wicket:id="name"></h5></a>
                 <p class="card-text" wicket:id="description"></p>
@@ -25,8 +35,6 @@
                         </a>
                     </div>
                 </div>
-
-
             </div>
             <div class="card-footer text-muted" wicket:id="createdAt">
                 <!-- Edit button -->

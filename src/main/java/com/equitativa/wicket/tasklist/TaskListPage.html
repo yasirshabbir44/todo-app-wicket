@@ -131,7 +131,7 @@
         <div class="form-group col-md-6">
           <label for="dueDate" class="font-weight-bold">Due Date:</label>
           <div class="input-group date">
-            <input wicket:id="dueDate" type="text" class="form-control" />
+            <input wicket:id="dueDate" type="text" class="form-control" required />
             <div class="input-group-append">
               <span class="input-group-text"><i class="bi bi-calendar"></i></span>
             </div>
@@ -140,7 +140,7 @@
 
         <div class="form-group col-md-6">
           <label for="priority" class="font-weight-bold">Priority:</label>
-          <select wicket:id="priority" class="form-control">
+          <select wicket:id="priority" class="form-control" required>
             <option value="HIGH">High</option>
             <option value="MEDIUM">Medium</option>
             <option value="LOW">Low</option>
