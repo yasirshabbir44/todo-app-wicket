@@ -4,6 +4,7 @@ package com.equitativa.wicket.tasklist;
 
 import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
+import com.equitativa.model.Person;
 import com.equitativa.repo.PersonService;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
@@ -19,6 +20,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import java.io.Serializable;
@@ -33,7 +35,7 @@ public class TaskListPage extends BasePage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private transient  PersonService userService;
+    private transient  PersonService personService;
 
     @Inject
     private transient  com.equitativa.repo.TaskService taskService;
@@ -65,11 +67,18 @@ public class TaskListPage extends BasePage implements Serializable {
         taskForm.add( new TextArea<>("description"));
         taskForm.add( new DateTextField("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
+
+        DropDownChoice<Person> userDropDown = new DropDownChoice<>("userDropDown", Model.of(), personService.getAllUsers());
+        userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
+
+        taskForm.add(userDropDown);
         taskForm.add(new Button("addTaskButton") {
             @Override
             public void onSubmit() {
+               Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
                 Task newTask = taskForm.getModelObject();
                 newTask.setId(UUID.randomUUID());
+                newTask.setPerson(person);
                 newTask.setStatus(Status.PENDING);
                 System.out.println(newTask);
                 taskService.save(newTask);

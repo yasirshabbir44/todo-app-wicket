@@ -31,4 +31,5 @@ public class Person implements Serializable {
     private Instant updatedAt;
 
     String name;
+    String imageUrl;
 }

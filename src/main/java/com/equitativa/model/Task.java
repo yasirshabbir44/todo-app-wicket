@@ -1,9 +1,7 @@
 package com.equitativa.model;
 
 // Task.java
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -40,8 +38,15 @@ public class Task implements Serializable {
     private String description;
     private LocalDate dueDate;
 
+    @Enumerated(EnumType.STRING)
     private Priority priority;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+
+    @ManyToOne
+    private Person person;
 
     @Override
     public boolean equals(Object o) {

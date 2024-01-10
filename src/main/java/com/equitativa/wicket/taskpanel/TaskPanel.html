@@ -1,10 +1,7 @@
 <wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
 
     <div class="d-flex justify-content-center mt-3 mb-3">
-        <div class="card mt-2 mb-2 shadow-sm" style="    width: 40px;
-    height: 30px;
-    margin-top: 10px;
-    margin-right: 10px;">
+        <div class="card mt-2 mb-2 shadow-sm" style="width: 100%; margin: 10px;">
             <div class="d-flex align-items-center">
                 <label class="container">Done
                     <input type="checkbox" wicket:id="statusCompleted">
@@ -13,7 +10,10 @@
 
                 <div class="ml-auto">
                     <!-- User image on the right -->
-                    <img src="img/img_1.png" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                    <img wicket:id="personImage" alt="Person Image" class="rounded-circle" style="     width: 40px;
+    height: 35px;
+    margin-top: 10px;
+    margin-right: 10px;"/>
                 </div>
             </div>
             <div class="card-body">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-muted" wicket:id="createdAt">
+            <div class="card-footer text-muted" wicket:id="dueDate">
                 <!-- Edit button -->
             </div>
         </div>

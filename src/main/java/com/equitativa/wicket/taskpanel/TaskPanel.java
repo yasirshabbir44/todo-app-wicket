@@ -3,6 +3,7 @@ package com.equitativa.wicket.taskpanel;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
 import com.equitativa.repo.TaskService;
+import com.equitativa.util.LocalDateFormatter;
 import com.equitativa.wicket.tasklist.TaskListPage;
 import com.google.inject.Inject;
 import org.apache.wicket.AttributeModifier;
@@ -13,16 +14,27 @@ import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.image.ExternalImage;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.util.convert.converter.LocalDateTimeConverter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class TaskPanel extends Panel {
 
     private IModel<Task> taskModel;
     @Inject
     private transient TaskService taskService;
+
+    @Inject
+    private transient  LocalDateFormatter localDateFormatter;
+
 
     public TaskPanel(String id, IModel<Task> taskModel) {
         super(id, taskModel);
@@ -39,7 +51,8 @@ public class TaskPanel extends Panel {
         Task task = taskModel.getObject();
         addTaskNameAndLink(task);
         add(new Label("description", task.getDescription()));
-        add(new Label("createdAt", task.getDueDate()));
+        add(new Label("dueDate",localDateFormatter.convertToString( task.getDueDate(), Locale.getDefault())));
+        add( new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
 
 
         CheckBox statusCompleted = new CheckBox("statusCompleted", Model.of(task.getStatus().equals(Status.COMPLETED)));
