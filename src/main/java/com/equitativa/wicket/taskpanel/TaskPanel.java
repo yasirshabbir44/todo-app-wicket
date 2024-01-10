@@ -2,10 +2,13 @@ package com.equitativa.wicket.taskpanel;
 
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
+import com.equitativa.repo.TaskService;
 import com.equitativa.wicket.tasklist.TaskListPage;
+import com.google.inject.Inject;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -18,6 +21,8 @@ import org.apache.wicket.model.Model;
 public class TaskPanel extends Panel {
 
     private IModel<Task> taskModel;
+    @Inject
+    private transient TaskService taskService;
 
     public TaskPanel(String id, IModel<Task> taskModel) {
         super(id, taskModel);
@@ -49,24 +54,29 @@ public class TaskPanel extends Panel {
             }
         });
 
-        // Edit button
-        add(new Link<Void>("editButton") {
-            @Override
-            public void onClick() {
-                // Placeholder for edit action, replace with actual logic
 
-                // Implement your logic for handling the edit action
-                // For example, redirect to an edit page with the task ID
-               // setResponsePage(new EditTaskPage(task.getId()));
+        add(new AjaxLink<Void>("editButton") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                // Update the label text
+                System.out.println(task);
+                taskService.delete(task);
+                target.appendJavaScript("window.location.reload();");
             }
         });
-
+        add(new AjaxLink<Void>("deleteButton") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                // Update the label text
+                System.out.println(task);
+                taskService.delete(task);
+                TaskListPage parent = findParent(TaskListPage.class);
+                parent.loadActivitiesByStatus();
+                target.appendJavaScript("window.location.reload();");
+            }
+        });
         // Delete button
-        add(new Link<Void>("deleteButton") {
-            @Override
-            public void onClick() {
-            }
-        });
+
         add(statusCompleted);
 
         addTaskLabel(task);

@@ -49,8 +49,8 @@ public class TaskListPage extends BasePage implements Serializable {
         populateStatusData();
     }
 
-    @Transactional
-    private void loadActivitiesByStatus() {
+
+    public void loadActivitiesByStatus() {
         tasksByStatusId = taskService.getAllTasks()
                 .stream()
                 .collect(groupingBy((task) -> task.getStatus()));

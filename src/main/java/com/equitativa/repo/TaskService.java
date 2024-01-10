@@ -40,6 +40,10 @@ public class TaskService implements Serializable {
     }
 
 
+    public void delete(Task task){
+        taskRepository.delete(task);
+    }
+
     @Transactional
     public void save(Task task){
         taskRepository.save(task);

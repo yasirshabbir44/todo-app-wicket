@@ -22,7 +22,6 @@ public abstract class BaseRepository<T extends Object> {
         getEntityManager().persist(entity);
     }
 
-
     public void save(List<T> entity) {
         getEntityManager().persist(entity);
     }
