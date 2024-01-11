@@ -1,6 +1,7 @@
 package com.equitativa.repo;
 
 
+import com.equitativa.model.Base;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.persistence.EntityManager;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public abstract class BaseRepository<T extends Object> {
+public abstract class BaseRepository<T extends Base> {
 
     @Inject
     private Provider<EntityManager> entityManagerProvider;

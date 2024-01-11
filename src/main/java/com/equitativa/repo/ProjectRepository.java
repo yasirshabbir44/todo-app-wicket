@@ -1,6 +1,5 @@
 package com.equitativa.repo;
 
-import com.equitativa.model.Person;
 import com.equitativa.model.Project;
 
 import java.io.Serializable;

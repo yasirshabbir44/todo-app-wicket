@@ -1,4 +1,4 @@
-package com.equitativa.model;
+package com.equitativa.model.enumerate;
 
 public enum Status {
 

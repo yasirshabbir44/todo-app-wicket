@@ -1,7 +1,7 @@
 package com.equitativa.wicket.taskpanel;
 
-import com.equitativa.model.Status;
 import com.equitativa.model.Task;
+import com.equitativa.model.enumerate.Status;
 import com.equitativa.service.TaskService;
 import com.equitativa.util.LocalDateFormatter;
 import com.equitativa.wicket.tasklist.TaskListPage;
@@ -44,8 +44,8 @@ public class TaskPanel extends Panel {
         Task task = taskModel.getObject();
         add(new Label("name", task.getTitle()));
         add(new Label("description", task.getDescription()));
-        add(new Label("dueDate","Due Date : "+ localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
-        add(new Label("createdDate","Created Date : "+ localDateFormatter.convertToString(task.getCreatedAt())));
+        add(new Label("dueDate", "Due Date : " + localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
+        add(new Label("createdDate", "Created Date : " + localDateFormatter.convertToString(task.getCreatedAt())));
         add(new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
         add(new Label("projectName", task.getProject().getName()));
         add(new Label("userName", task.getPerson().getName()));

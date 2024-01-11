@@ -65,12 +65,14 @@ Implementing your first Apache Wicket project can indeed be challenging, especia
 - Implemented Single page to perform all operation during task management to avoid multiple clicks or navigating in to mutliple screens.
 - Added Priority of each Task so that get to know which one is higher priority.
 - Add User Image along with name with Each task panel so that It will more readable.
+- Main page showing sliders of images of how it works.
 
 ### Improvements
 
 - Pagination can also be introduced to avoid infinite-scroll.
 - Can also perform CRUD operation on User(Person) and Project(Building).
 - Can be sort Task by User, Priority adn task status wise.
+- Alert or success dialog or confirmation can be added on time of Task Deletion
 
 ### Inspiration or helping material
 - https://wicket.apache.org/

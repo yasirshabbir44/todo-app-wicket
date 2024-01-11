@@ -1,8 +1,8 @@
 package com.equitativa.service;
 
-import com.equitativa.model.Priority;
-import com.equitativa.model.Status;
 import com.equitativa.model.Task;
+import com.equitativa.model.enumerate.Priority;
+import com.equitativa.model.enumerate.Status;
 import com.equitativa.repo.TaskRepository;
 import com.google.inject.persist.Transactional;
 import jakarta.inject.Inject;

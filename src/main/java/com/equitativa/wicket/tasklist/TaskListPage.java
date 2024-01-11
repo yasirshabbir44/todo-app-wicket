@@ -2,11 +2,15 @@ package com.equitativa.wicket.tasklist;
 
 // TodoListPage.java
 
-import com.equitativa.wicket.base.BasePage;
-import com.equitativa.model.*;
+import com.equitativa.model.Person;
+import com.equitativa.model.Project;
+import com.equitativa.model.Task;
+import com.equitativa.model.enumerate.Priority;
+import com.equitativa.model.enumerate.Status;
 import com.equitativa.service.PersonService;
 import com.equitativa.service.ProjectService;
 import com.equitativa.service.TaskService;
+import com.equitativa.wicket.base.BasePage;
 import com.equitativa.wicket.home.Home;
 import com.equitativa.wicket.tasklist.renderer.ProjectChoiceRenderer;
 import com.equitativa.wicket.tasklist.renderer.UserChoiceRenderer;
@@ -33,18 +37,13 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class TaskListPage extends BasePage implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    private final Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
     @Inject
     private transient PersonService personService;
-
     @Inject
     private transient TaskService taskService;
-
     @Inject
     private transient ProjectService projectService;
-
-    private final Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
-
     private transient Map<Status, List<Task>> tasksByStatusId;
 
 
@@ -63,13 +62,11 @@ public class TaskListPage extends BasePage implements Serializable {
         taskForm.add(new DateTextField("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
 
-        DropDownChoice<Person> userDropDown = new DropDownChoice<>("userDropDown", Model.of(), personService.getAllUsers());
-        userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
-
-
         DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown", Model.of(), projectService.getAllProjects());
         projectDropDown.setChoiceRenderer(new ProjectChoiceRenderer()); // Create a custom ChoiceRenderer if needed
 
+        DropDownChoice userDropDown = new DropDownChoice("userDropDown", Model.of(), personService.getAllUsers());
+        userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
 
 
         taskForm.add(userDropDown);

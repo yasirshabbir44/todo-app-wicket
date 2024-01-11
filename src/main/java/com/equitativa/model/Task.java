@@ -2,12 +2,13 @@ package com.equitativa.model;
 
 // Task.java
 
+import com.equitativa.model.enumerate.Priority;
+import com.equitativa.model.enumerate.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Builder
 @Data
 @Entity
-public class Task implements Serializable {
+public class Task extends Base {
     @Id
     private UUID id;
 

@@ -1,11 +1,9 @@
 package com.equitativa.wicket.base;
 
-import com.equitativa.wicket.tasklist.TaskListPage;
 import org.apache.wicket.markup.head.CssReferenceHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.link.Link;
 
 /**
  * A base page class to be used as a parent for the pages we're implementing.

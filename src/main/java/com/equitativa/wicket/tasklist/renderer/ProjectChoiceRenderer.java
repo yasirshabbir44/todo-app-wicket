@@ -1,7 +1,6 @@
 package com.equitativa.wicket.tasklist.renderer;
 
 import com.equitativa.model.Project;
-import com.equitativa.model.Project;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 
 public class ProjectChoiceRenderer implements IChoiceRenderer<Project> {

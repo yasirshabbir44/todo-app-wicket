@@ -1,8 +1,6 @@
 package com.equitativa.service;
 
-import com.equitativa.model.Person;
 import com.equitativa.model.Project;
-import com.equitativa.repo.PersonRepository;
 import com.equitativa.repo.ProjectRepository;
 import jakarta.inject.Inject;
 
