@@ -17,7 +17,7 @@ public class TaskService implements Serializable {
     private static List<Task> tasks;
 
     @Inject
-    com.equitativa.repo.TaskService taskService;
+    com.equitativa.service.TaskService taskService;
 
     public TaskService() {
         tasks = new ArrayList<>();

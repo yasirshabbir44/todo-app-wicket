@@ -2,14 +2,12 @@ package com.equitativa.wicket.tasklist;
 
 // TodoListPage.java
 
-import com.equitativa.base.BasePage;
-import com.equitativa.model.Person;
-import com.equitativa.model.Priority;
-import com.equitativa.model.Status;
-import com.equitativa.model.Task;
-import com.equitativa.repo.PersonService;
-import com.equitativa.temp.Temp;
-import com.equitativa.wicket.home.HomePage;
+import com.equitativa.wicket.base.BasePage;
+import com.equitativa.model.*;
+import com.equitativa.service.PersonService;
+import com.equitativa.service.ProjectService;
+import com.equitativa.service.TaskService;
+import com.equitativa.wicket.temp.Temp;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
@@ -38,7 +36,11 @@ public class TaskListPage extends BasePage implements Serializable {
     private transient PersonService personService;
 
     @Inject
-    private transient com.equitativa.repo.TaskService taskService;
+    private transient TaskService taskService;
+
+    @Inject
+    private transient ProjectService projectService;
+
     private final Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
 
     private transient Map<Status, List<Task>> tasksByStatusId;
@@ -62,14 +64,23 @@ public class TaskListPage extends BasePage implements Serializable {
         DropDownChoice<Person> userDropDown = new DropDownChoice<>("userDropDown", Model.of(), personService.getAllUsers());
         userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
 
+
+        DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown", Model.of(), projectService.getAllProjects());
+        projectDropDown.setChoiceRenderer(new ProjectChoiceRenderer()); // Create a custom ChoiceRenderer if needed
+
+
+
         taskForm.add(userDropDown);
+        taskForm.add(projectDropDown);
         taskForm.add(new Button("addTaskButton") {
             @Override
             public void onSubmit() {
                 Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
+                Project project = (Project) taskForm.get("projectDropDown").getDefaultModel().getObject();
                 Task newTask = taskForm.getModelObject();
                 newTask.setId(UUID.randomUUID());
                 newTask.setPerson(person);
+                newTask.setProject(project);
                 newTask.setStatus(Status.PENDING);
                 System.out.println(newTask);
                 taskService.save(newTask);

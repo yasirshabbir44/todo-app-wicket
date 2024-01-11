@@ -1,6 +1,6 @@
 package com.equitativa;
 
-import com.equitativa.temp.Temp;
+import com.equitativa.wicket.temp.Temp;
 import com.google.inject.Injector;
 import de.agilecoders.wicket.core.Bootstrap;
 import jakarta.inject.Inject;

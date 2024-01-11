@@ -415,14 +415,12 @@ figure.effect-honey:hover h2 i {
 /* Contact */
 
 #contact {
+  background-color: #6493d2;
   color: white;
-  background-image: url(../img/the-town-bg-02.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 850px;
+  min-height: 400px;
   position: relative;
-  padding-bottom: 50px;
-  padding-top: 160px;
 }
 
 .tm-underline {

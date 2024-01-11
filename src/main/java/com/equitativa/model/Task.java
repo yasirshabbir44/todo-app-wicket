@@ -48,6 +48,10 @@ public class Task implements Serializable {
     @ManyToOne
     private Person person;
 
+    @ManyToOne
+    private Project project;
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
