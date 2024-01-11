@@ -15,25 +15,20 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.image.ExternalImage;
-import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.util.convert.converter.LocalDateTimeConverter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class TaskPanel extends Panel {
 
-    private IModel<Task> taskModel;
+    private final IModel<Task> taskModel;
     @Inject
     private transient TaskService taskService;
 
     @Inject
-    private transient  LocalDateFormatter localDateFormatter;
+    private transient LocalDateFormatter localDateFormatter;
 
 
     public TaskPanel(String id, IModel<Task> taskModel) {
@@ -51,8 +46,8 @@ public class TaskPanel extends Panel {
         Task task = taskModel.getObject();
         addTaskNameAndLink(task);
         add(new Label("description", task.getDescription()));
-        add(new Label("dueDate",localDateFormatter.convertToString( task.getDueDate(), Locale.getDefault())));
-        add( new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
+        add(new Label("dueDate", localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
+        add(new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
 
 
         CheckBox statusCompleted = new CheckBox("statusCompleted", Model.of(task.getStatus().equals(Status.COMPLETED)));
@@ -103,7 +98,7 @@ public class TaskPanel extends Panel {
     }
 
     private void addTaskLabel(Task task) {
-        var activityLabel = new Label("label",task.getPriority().toString());
+        var activityLabel = new Label("label", task.getPriority().toString());
         AttributeAppender attributeAppender = switch (task.getPriority()) {
             case LOW -> new AttributeAppender("style", "background-color: blue !important;");
             case MEDIUM -> new AttributeAppender("style", "background-color: #ffc107 !important;");

@@ -2,13 +2,7 @@ package com.equitativa.temp;
 
 import com.equitativa.base.BasePage;
 
-import static java.util.stream.Collectors.groupingBy;
-
-public class Temp  extends BasePage {
-
-
-
-
+public class Temp extends BasePage {
 
 
     public Temp() {

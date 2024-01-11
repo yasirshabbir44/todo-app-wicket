@@ -1,6 +1,7 @@
 package com.equitativa.model;
 
 // Task.java
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +12,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
-
 
 
 @ToString

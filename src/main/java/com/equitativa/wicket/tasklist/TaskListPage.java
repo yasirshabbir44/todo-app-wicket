@@ -2,17 +2,14 @@ package com.equitativa.wicket.tasklist;
 
 // TodoListPage.java
 
-import com.equitativa.TaskService;
 import com.equitativa.base.BasePage;
 import com.equitativa.model.Person;
-import com.equitativa.repo.PersonService;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
-import com.equitativa.repo.TaskRepository;
+import com.equitativa.repo.PersonService;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
-import jakarta.transaction.Transactional;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -35,37 +32,22 @@ public class TaskListPage extends BasePage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private transient  PersonService personService;
+    private transient PersonService personService;
 
     @Inject
-    private transient  com.equitativa.repo.TaskService taskService;
-    private  Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
+    private transient com.equitativa.repo.TaskService taskService;
+    private final Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
 
     private transient Map<Status, List<Task>> tasksByStatusId;
 
 
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
-        loadActivitiesByStatus();
-        populateStatusData();
-    }
-
-
-    public void loadActivitiesByStatus() {
-        tasksByStatusId = taskService.getAllTasks()
-                .stream()
-                .collect(groupingBy((task) -> task.getStatus()));
-
-    }
-
     public TaskListPage() {
         // Form for adding new tasks
 
-       // taskService.testData();
+        // taskService.testData();
         taskForm.add(new TextField<>("title"));
-        taskForm.add( new TextArea<>("description"));
-        taskForm.add( new DateTextField("dueDate"));
+        taskForm.add(new TextArea<>("description"));
+        taskForm.add(new DateTextField("dueDate"));
         taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
 
         DropDownChoice<Person> userDropDown = new DropDownChoice<>("userDropDown", Model.of(), personService.getAllUsers());
@@ -75,19 +57,33 @@ public class TaskListPage extends BasePage implements Serializable {
         taskForm.add(new Button("addTaskButton") {
             @Override
             public void onSubmit() {
-               Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
+                Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
                 Task newTask = taskForm.getModelObject();
                 newTask.setId(UUID.randomUUID());
                 newTask.setPerson(person);
                 newTask.setStatus(Status.PENDING);
                 System.out.println(newTask);
                 taskService.save(newTask);
-               // taskService.addTask(newTask);
+                // taskService.addTask(newTask);
                 taskForm.setModelObject(new Task()); // Reset the form
                 loadActivitiesByStatus();
             }
         });
         add(taskForm);
+
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        loadActivitiesByStatus();
+        populateStatusData();
+    }
+
+    public void loadActivitiesByStatus() {
+        tasksByStatusId = taskService.getAllTasks()
+                .stream()
+                .collect(groupingBy((task) -> task.getStatus()));
 
     }
 

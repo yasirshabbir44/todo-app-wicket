@@ -1,6 +1,5 @@
 package com.equitativa.repo;
 
-import com.equitativa.model.Person;
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
@@ -30,30 +29,30 @@ public class TaskService implements Serializable {
         return taskRepository.getTaskList();
     }
 
-    public void save(List<Task> task){
+    public void save(List<Task> task) {
         taskRepository.save(task);
     }
 
-    public void update(Task task){
+    public void update(Task task) {
 
-        taskRepository.update(task,task.getId());
+        taskRepository.update(task, task.getId());
     }
 
 
-    public void delete(Task task){
+    public void delete(Task task) {
         taskRepository.delete(task);
     }
 
     @Transactional
-    public void save(Task task){
+    public void save(Task task) {
         taskRepository.save(task);
     }
 
 
     @Transactional
-    public void testData(){
+    public void testData() {
 
-            List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Task.TaskBuilder taskBuilder = Task.builder()
                 .id(UUID.randomUUID())
                 .title("ipsum dolor sit amet")
@@ -70,12 +69,12 @@ public class TaskService implements Serializable {
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
 
-          //  tasks.forEach(taskRepository::save);
+        //  tasks.forEach(taskRepository::save);
 
         Task task = taskBuilder.id(UUID.randomUUID()).build();
         for (Task t : tasks) {
             taskRepository.save(t);
         }
 
-        }
+    }
 }

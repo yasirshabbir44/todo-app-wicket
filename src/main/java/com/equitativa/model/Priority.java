@@ -10,7 +10,7 @@ public enum Priority {
     private final String name;
 
 
-    Priority(String name){
+    Priority(String name) {
         this.name = name;
     }
 

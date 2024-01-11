@@ -12,7 +12,7 @@ public class PersonService implements Serializable {
     private final PersonRepository sqlPersonRepository;
 
     @Inject
-    public PersonService( PersonRepository sqlPersonRepository) {
+    public PersonService(PersonRepository sqlPersonRepository) {
         this.sqlPersonRepository = sqlPersonRepository;
     }
 

@@ -5,8 +5,6 @@ import com.equitativa.ApplicationWicketFilter;
 import com.equitativa.WicketApplication;
 import com.google.inject.Scopes;
 import com.google.inject.persist.PersistFilter;
-import com.google.inject.Scopes;
-import com.google.inject.persist.PersistFilter;
 import com.google.inject.servlet.ServletModule;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WicketFilter;
@@ -16,6 +14,7 @@ import java.util.Map;
 /**
  * A configuration to use Guice DI in the Wicket APP.
  * It will enable both the persistence filter and the wicket filter.
+ *
  * @see <a href="https://software.danielwatrous.com/wicket-guice-including-unittests/">Wicket and Guice</a>
  */
 public class GuiceServletModule extends ServletModule {

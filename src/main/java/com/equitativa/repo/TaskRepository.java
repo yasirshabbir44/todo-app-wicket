@@ -1,8 +1,6 @@
 package com.equitativa.repo;
 
-import com.equitativa.model.Person;
 import com.equitativa.model.Task;
-import com.google.inject.persist.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -29,7 +27,7 @@ public class TaskRepository extends BaseRepository<Task> implements Serializable
     }
 
 
-    public void delete(Task task){
+    public void delete(Task task) {
 //        em.remove(findById(task.getId()));
 
         Task t = findById(task.getId());
@@ -40,7 +38,7 @@ public class TaskRepository extends BaseRepository<Task> implements Serializable
         getEntityManager().getTransaction().commit();
     }
 
-    public void update(Task updatedTask, UUID id){
+    public void update(Task updatedTask, UUID id) {
         Task task = findById(id);
         getEntityManager().getTransaction().begin();
         task.setStatus(updatedTask.getStatus());

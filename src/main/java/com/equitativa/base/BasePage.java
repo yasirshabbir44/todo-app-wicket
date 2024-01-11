@@ -8,8 +8,6 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 
-import java.io.Serializable;
-
 /**
  * A base page class to be used as a parent for the pages we're implementing.
  * This would do some common page configuration, such as adding bootstrap.
@@ -23,21 +21,8 @@ public abstract class BasePage extends WebPage {
     private static final String DIST_JS_BOOTSTRAP_MIN_JS = "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js";
 
     private static final String MAIN_CSS_URL = "/style.css";
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        response.render(CssReferenceHeaderItem.forUrl(BOOTSTRAP_MIN_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forUrl(JQUERY_COM_JQUERY_3_5_1));
-        response.render(JavaScriptReferenceHeaderItem.forUrl(POPPER_MIN_JS));
-        response.render(JavaScriptReferenceHeaderItem.forUrl(DIST_JS_BOOTSTRAP_MIN_JS));
-        response.render(CssReferenceHeaderItem.forUrl(MAIN_CSS_URL));
-        response.render(CssReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"));
-        response.render(JavaScriptReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"));
 
-        response.render(CssReferenceHeaderItem.forUrl("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"));
-
-    }
-
-    public BasePage(){
+    public BasePage() {
         add(new Link<Void>("redirectToHomePage") {
             @Override
             public void onClick() {
@@ -50,6 +35,20 @@ public abstract class BasePage extends WebPage {
                 setResponsePage(TaskListPage.class);
             }
         });
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        response.render(CssReferenceHeaderItem.forUrl(BOOTSTRAP_MIN_CSS));
+        response.render(JavaScriptReferenceHeaderItem.forUrl(JQUERY_COM_JQUERY_3_5_1));
+        response.render(JavaScriptReferenceHeaderItem.forUrl(POPPER_MIN_JS));
+        response.render(JavaScriptReferenceHeaderItem.forUrl(DIST_JS_BOOTSTRAP_MIN_JS));
+        response.render(CssReferenceHeaderItem.forUrl(MAIN_CSS_URL));
+        response.render(CssReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"));
+        response.render(JavaScriptReferenceHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"));
+
+        response.render(CssReferenceHeaderItem.forUrl("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"));
+
     }
 
 }

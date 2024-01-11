@@ -1,6 +1,7 @@
 package com.equitativa;
 
 // TaskService.java
+
 import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
@@ -19,7 +20,7 @@ public class TaskService implements Serializable {
     com.equitativa.repo.TaskService taskService;
 
     public TaskService() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         Task.TaskBuilder taskBuilder = Task.builder()
                 .id(UUID.randomUUID())
@@ -37,7 +38,7 @@ public class TaskService implements Serializable {
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
         tasks.add(taskBuilder.id(UUID.randomUUID()).status(Status.COMPLETED).build());
 
-      //  taskService.sa
+        //  taskService.sa
     }
 
     public List<Task> getTasks() {

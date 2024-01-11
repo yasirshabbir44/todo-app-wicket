@@ -1,190 +1,188 @@
 <wicket:extend xmlns:wicket="http://www.w3.org/1999/xhtml">
-  <script>
-    function showTaskForm() {
-      var myDiv = document.getElementById('taskForm');
-      myDiv.style.display = 'block';
+    <script>
+        function showTaskForm() {
+            var myDiv = document.getElementById('taskForm');
+            myDiv.style.display = 'block';
 
-      var createTaskButton = document.getElementById('createTaskButton');
-      createTaskButton.style.visibility = 'hidden';
+            var createTaskButton = document.getElementById('createTaskButton');
+            createTaskButton.style.visibility = 'hidden';
 
-    }
+        }
 
-    function showAddTaskButton() {
+        function showAddTaskButton() {
 
-      var title = $('#title').val();
-      var dueDate = $('#dueDate').val();
-      var priority = $('#priority').val();
-      var description = $('#description').val();
+            var title = $('#title').val();
+            var dueDate = $('#dueDate').val();
+            var priority = $('#priority').val();
+            var description = $('#description').val();
 
-      if (title && dueDate && priority && description) {
-        var myDiv = document.getElementById('taskForm');
-        myDiv.style.display = 'none';
+            if (title && dueDate && priority && description) {
+                var myDiv = document.getElementById('taskForm');
+                myDiv.style.display = 'none';
 
-        var createTaskButton = document.getElementById('createTaskButton');
-        createTaskButton.style.visibility = 'visible';
-      }
+                var createTaskButton = document.getElementById('createTaskButton');
+                createTaskButton.style.visibility = 'visible';
+            }
 
-    }
+        }
 
-    function resetTaskButton() {
-      var myDiv = document.getElementById('taskForm');
-      myDiv.style.display = 'none';
+        function resetTaskButton() {
+            var myDiv = document.getElementById('taskForm');
+            myDiv.style.display = 'none';
 
-      var createTaskButton = document.getElementById('createTaskButton');
-      createTaskButton.style.visibility = 'visible';
+            var createTaskButton = document.getElementById('createTaskButton');
+            createTaskButton.style.visibility = 'visible';
 
-    }
+        }
 
-     // Activate the datepicker
-      $(document).ready(function () {
-        $('.input-group.date').datepicker({
-          format: 'dd/mm/yyyy', // You can adjust the format as needed
-          autoclose: true,
-          todayHighlight: true
+        // Activate the datepicker
+        $(document).ready(function () {
+            $('.input-group.date').datepicker({
+                format: 'dd/mm/yyyy', // You can adjust the format as needed
+                autoclose: true,
+                todayHighlight: true
+            });
         });
-      });
 
 
+    </script>
 
-  </script>
+    <style>
+        #taskForm {
+            display: none;
+        }
 
-  <style>
-    #taskForm {
-      display: none;
-    }
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    .container {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+        /* Hide the browser's default checkbox */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
 
-    /* Hide the browser's default checkbox */
-    .container input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+        }
 
-    /* Create a custom checkbox */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 25px;
-      width: 25px;
-      background-color: #eee;
-    }
+        /* On mouse-over, add a grey background color */
+        .container:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
 
-    /* On mouse-over, add a grey background color */
-    .container:hover input~.checkmark {
-      background-color: #ccc;
-    }
+        /* When the checkbox is checked, add a blue background */
+        .container input:checked ~ .checkmark {
+            background-color: #34c956;
+        }
 
-    /* When the checkbox is checked, add a blue background */
-    .container input:checked~.checkmark {
-      background-color: #34c956;
-    }
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
 
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
 
-    /* Show the checkmark when checked */
-    .container input:checked~.checkmark:after {
-      display: block;
-    }
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    </style>
 
-    /* Style the checkmark/indicator */
-    .container .checkmark:after {
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-  </style>
+    <div class="container-fluid status-activities mt-5 border rounded p-4 bg-light" id="taskForm">
 
-  <div id="taskForm" class="container-fluid status-activities mt-5 border rounded p-4 bg-light">
-
-    <form wicket:id="taskForm" class="mb-3">
-      <div class="form-group">
-        <label for="title" class="font-weight-bold">Title:</label>
-        <input type="text" wicket:id="title" class="form-control" required />
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="dueDate" class="font-weight-bold">Due Date:</label>
-          <div class="input-group date">
-            <input wicket:id="dueDate" type="text" class="form-control" required />
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+        <form class="mb-3" wicket:id="taskForm">
+            <div class="form-group">
+                <label class="font-weight-bold" for="title">Title:</label>
+                <input class="form-control" required type="text" wicket:id="title"/>
             </div>
-          </div>
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label class="font-weight-bold" for="dueDate">Due Date:</label>
+                    <div class="input-group date">
+                        <input class="form-control" required type="text" wicket:id="dueDate"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group col-md-4">
-          <label for="priority" class="font-weight-bold">Priority:</label>
-          <select wicket:id="priority" class="form-control" required>
-            <option value="HIGH">High</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="LOW">Low</option>
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <label for="userDropDown" class="font-weight-bold">User:</label>
-          <select wicket:id="userDropDown" class="form-control" required></select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="description" class="font-weight-bold">Description:</label>
-        <textarea wicket:id="description" class="form-control" required></textarea>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-12 text-right">
-          <button type="submit" wicket:id="addTaskButton" class="btn btn-primary">Add Task</button>
-          <button type="reset" onclick="resetTaskButton()" class="btn btn-secondary ml-2">Cancel</button>
-        </div>
-      </div>
-    </form>
+                <div class="form-group col-md-4">
+                    <label class="font-weight-bold" for="priority">Priority:</label>
+                    <select class="form-control" required wicket:id="priority">
+                        <option value="HIGH">High</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="LOW">Low</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="font-weight-bold" for="userDropDown">User:</label>
+                    <select class="form-control" required wicket:id="userDropDown"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" for="description">Description:</label>
+                <textarea class="form-control" required wicket:id="description"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12 text-right">
+                    <button class="btn btn-primary" type="submit" wicket:id="addTaskButton">Add Task</button>
+                    <button class="btn btn-secondary ml-2" onclick="resetTaskButton()" type="reset">Cancel</button>
+                </div>
+            </div>
+        </form>
 
 
-  </div>
-
-  <br> <br>
-  <a role="button" aria-disabled="true" tabindex="-1" id="createTaskButton" onclick="showTaskForm()"
-    style="margin-left: 90%;" class="btn btn-outline-dark px-4 py-2"> Create Task</a>
-
-
-
-  <br> <br>
-  <!-- Activity Statuses -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col" wicket:id="priorityItem">
-        <div class="status-header text-center py-2 fw-bold bg-primary text-white">
-          <span wicket:id="enumLabel"></span>
-        </div>
-        <div class="status-activities p-3 border rounded">
-          <div wicket:id="taskList"></div>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <br> <br>
+    <a aria-disabled="true" class="btn btn-outline-dark px-4 py-2" id="createTaskButton" onclick="showTaskForm()" role="button"
+       style="margin-left: 90%;" tabindex="-1"> Create Task</a>
+
+
+    <br> <br>
+    <!-- Activity Statuses -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" wicket:id="priorityItem">
+                <div class="status-header text-center py-2 fw-bold bg-primary text-white">
+                    <span wicket:id="enumLabel"></span>
+                </div>
+                <div class="status-activities p-3 border rounded">
+                    <div wicket:id="taskList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </wicket:extend>

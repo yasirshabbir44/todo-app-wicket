@@ -18,18 +18,14 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 public class Person implements Serializable {
-    @Id
-    private UUID id;
-
-    @Version
-    private Integer version;
-
-    @CreationTimestamp
-    private Instant createdAt;
-
-    @UpdateTimestamp
-    private Instant updatedAt;
-
     String name;
     String imageUrl;
+    @Id
+    private UUID id;
+    @Version
+    private Integer version;
+    @CreationTimestamp
+    private Instant createdAt;
+    @UpdateTimestamp
+    private Instant updatedAt;
 }

@@ -4,12 +4,8 @@ package com.equitativa.repo;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -39,7 +35,7 @@ public abstract class BaseRepository<T extends Object> {
         return entityManagerProvider.get();
     }
 
-    public void flush(){
+    public void flush() {
         getEntityManager().flush();
     }
 }
