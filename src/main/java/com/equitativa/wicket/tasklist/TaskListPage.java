@@ -8,11 +8,14 @@ import com.equitativa.model.Priority;
 import com.equitativa.model.Status;
 import com.equitativa.model.Task;
 import com.equitativa.repo.PersonService;
+import com.equitativa.temp.Temp;
+import com.equitativa.wicket.home.HomePage;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.RepeatingView;
@@ -43,6 +46,12 @@ public class TaskListPage extends BasePage implements Serializable {
 
     public TaskListPage() {
         // Form for adding new tasks
+        add(new Link<Void>("redirectToHomePage") {
+            @Override
+            public void onClick() {
+                setResponsePage(Temp.class);
+            }
+        });
 
         // taskService.testData();
         taskForm.add(new TextField<>("title"));

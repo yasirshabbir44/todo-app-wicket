@@ -44,9 +44,9 @@ public class TaskPanel extends Panel {
 
     private void populateTaskData() {
         Task task = taskModel.getObject();
-        addTaskNameAndLink(task);
+        add(new Label("name", task.getTitle()));
         add(new Label("description", task.getDescription()));
-        add(new Label("dueDate", localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
+        add(new Label("dueDate","Due Date : "+ localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
         add(new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
 
 
@@ -63,15 +63,6 @@ public class TaskPanel extends Panel {
         });
 
 
-        add(new AjaxLink<Void>("editButton") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                // Update the label text
-                System.out.println(task);
-                taskService.delete(task);
-                target.appendJavaScript("window.location.reload();");
-            }
-        });
         add(new AjaxLink<Void>("deleteButton") {
             @Override
             public void onClick(AjaxRequestTarget target) {
@@ -90,12 +81,6 @@ public class TaskPanel extends Panel {
         addTaskLabel(task);
     }
 
-    private void addTaskNameAndLink(Task task) {
-        var taskLink = new WebMarkupContainer("link");
-        taskLink.add(new AttributeModifier("href", "/task/view?id=" + task.getId()));
-        add(taskLink);
-        taskLink.add(new Label("name", task.getTitle()));
-    }
 
     private void addTaskLabel(Task task) {
         var activityLabel = new Label("label", task.getPriority().toString());
