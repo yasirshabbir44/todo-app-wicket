@@ -45,6 +45,7 @@ public class TaskPanel extends Panel {
         add(new Label("name", task.getTitle()));
         add(new Label("description", task.getDescription()));
         add(new Label("dueDate","Due Date : "+ localDateFormatter.convertToString(task.getDueDate(), Locale.getDefault())));
+        add(new Label("createdDate","Created Date : "+ localDateFormatter.convertToString(task.getCreatedAt())));
         add(new ExternalImage("personImage", Model.of(task.getPerson().getImageUrl())));
         add(new Label("projectName", task.getProject().getName()));
         add(new Label("userName", task.getPerson().getName()));

@@ -1,17 +1,17 @@
-package com.equitativa.wicket.temp;
+package com.equitativa.wicket.home;
 
 import com.equitativa.wicket.base.BasePage;
 import com.equitativa.wicket.tasklist.TaskListPage;
 import org.apache.wicket.markup.html.link.Link;
 
-public class Temp extends BasePage {
+public class Home extends BasePage {
 
 
-    public Temp() {
+    public Home() {
         add(new Link<Void>("redirectToHomePage") {
             @Override
             public void onClick() {
-                setResponsePage(Temp.class);
+                setResponsePage(Home.class);
             }
         });
 

@@ -1,6 +1,6 @@
 package com.equitativa;
 
-import com.equitativa.wicket.temp.Temp;
+import com.equitativa.wicket.home.Home;
 import com.google.inject.Injector;
 import de.agilecoders.wicket.core.Bootstrap;
 import jakarta.inject.Inject;
@@ -25,7 +25,7 @@ public class WicketApplication extends WebApplication {
 
     @Override
     public Class<? extends WebPage> getHomePage() {
-        return Temp.class;
+        return Home.class;
     }
 
     /**
@@ -37,6 +37,7 @@ public class WicketApplication extends WebApplication {
         // Enable GUICE CDI
         getComponentInstantiationListeners().add(new GuiceComponentInjector(this, injector, false));
         Bootstrap.install(this);
+
         // Disable Content Security Policy for Testing Purposes
         getCspSettings().blocking().disabled();
     }

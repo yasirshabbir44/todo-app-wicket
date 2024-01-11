@@ -1,4 +1,4 @@
-package com.equitativa.wicket.tasklist;
+package com.equitativa.wicket.tasklist.renderer;
 
 import com.equitativa.model.Person;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;

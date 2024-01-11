@@ -38,7 +38,8 @@
         // Activate the datepicker
         $(document).ready(function () {
             $('.input-group.date').datepicker({
-                format: 'dd/mm/yyyy', // You can adjust the format as needed
+                format: 'mm/dd/yyyy', // You can adjust the format as needed
+                pattern: 'MM/dd/yyyy',
                 autoclose: true,
                 todayHighlight: true
             });
@@ -124,7 +125,7 @@
             <a href="/"><img src="img/logo.png" alt="Logo"/></a>
         </div>
         <nav>
-            <a wicket:id="redirectToHomePage">Home</a> |
+            <a wicket:id="redirectToHomePage">Home</a>
 
         </nav>
     </header>

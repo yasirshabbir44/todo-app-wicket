@@ -37,12 +37,11 @@ public class LocalDateFormatter implements IConverter<LocalDate> {
         return value.format(DateTimeFormatter.ofPattern(PATTERN));
     }
 
-    public String convertToString(Instant value, Locale locale) {
+    public String convertToString(Instant value) {
         LocalDate localDate = LocalDate.ofInstant(value, ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PATTERN);
         // Format LocalDateTime to a string using the custom formatter
         return localDate.format(formatter);
-
     }
 
 }

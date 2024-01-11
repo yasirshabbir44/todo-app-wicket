@@ -1,4 +1,4 @@
-package com.equitativa.wicket.tasklist;
+package com.equitativa.wicket.tasklist.renderer;
 
 import com.equitativa.model.Project;
 import com.equitativa.model.Project;

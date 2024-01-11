@@ -7,7 +7,9 @@ import com.equitativa.model.*;
 import com.equitativa.service.PersonService;
 import com.equitativa.service.ProjectService;
 import com.equitativa.service.TaskService;
-import com.equitativa.wicket.temp.Temp;
+import com.equitativa.wicket.home.Home;
+import com.equitativa.wicket.tasklist.renderer.ProjectChoiceRenderer;
+import com.equitativa.wicket.tasklist.renderer.UserChoiceRenderer;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
@@ -51,7 +53,7 @@ public class TaskListPage extends BasePage implements Serializable {
         add(new Link<Void>("redirectToHomePage") {
             @Override
             public void onClick() {
-                setResponsePage(Temp.class);
+                setResponsePage(Home.class);
             }
         });
 
