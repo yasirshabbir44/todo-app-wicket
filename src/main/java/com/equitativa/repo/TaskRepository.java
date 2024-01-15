@@ -28,22 +28,33 @@ public class TaskRepository extends BaseRepository<Task> implements Serializable
 
 
     public void delete(Task task) {
-//        em.remove(findById(task.getId()));
 
         Task t = findById(task.getId());
         EntityManager em = getEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.remove(t);
-        getEntityManager().getTransaction().commit();
+        transaction.commit();
     }
 
-    public void update(Task updatedTask, UUID id) {
-        Task task = findById(id);
-        getEntityManager().getTransaction().begin();
-        task.setStatus(updatedTask.getStatus());
-        task.setPriority(updatedTask.getPriority());
-        getEntityManager().getTransaction().commit();
+    public void update(Task task, UUID id) {
+        Task t = findById(task.getId());
+
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+
+        t.setProject(task.getProject());
+        t.setPerson(task.getPerson());
+        t.setPriority(task.getPriority());
+        t.setDescription(task.getDescription());
+        t.setTitle(task.getTitle());
+        t.setStatus(task.getStatus());
+        t.setDueDate(task.getDueDate());
+
+        em.merge(t);
+        transaction.commit();
     }
 
 

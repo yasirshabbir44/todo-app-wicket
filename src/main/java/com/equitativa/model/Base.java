@@ -16,7 +16,7 @@ import java.util.UUID;
 @MappedSuperclass
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 public class Base implements Serializable {
     @Id
     private UUID id;

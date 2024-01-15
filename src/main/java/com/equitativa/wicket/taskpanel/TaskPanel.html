@@ -30,7 +30,9 @@
                         <span class="badge bg-secondary" wicket:id="label"></span>
                     </div>
                     <div class="form-group col-md-8 text-right">
-
+                        <a class="btn btn-primary btn-sm" wicket:id="editButton" onclick="scrollToTop()">
+                            <i class="bi bi-pencil">Edit</i>
+                        </a>
 
                         <!-- Delete button -->
                         <a class="btn btn-danger btn-sm" wicket:id="deleteButton">
@@ -45,4 +47,14 @@
             </div>
         </div>
     </div>
+
+
+
+    <script>
+        function scrollToTop() {
+            // Use JavaScript to scroll the window to the top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
 </wicket:panel>

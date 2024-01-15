@@ -11,11 +11,15 @@ import com.equitativa.service.PersonService;
 import com.equitativa.service.ProjectService;
 import com.equitativa.service.TaskService;
 import com.equitativa.wicket.base.BasePage;
+import com.equitativa.wicket.event.UpdateEvent;
 import com.equitativa.wicket.home.Home;
 import com.equitativa.wicket.tasklist.renderer.ProjectChoiceRenderer;
 import com.equitativa.wicket.tasklist.renderer.UserChoiceRenderer;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -24,20 +28,21 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
 
 public class TaskListPage extends BasePage implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final Form<Task> taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(new Task()));
+    private Form<Task> taskForm;
+    private IModel<Task> taskModel = Model.of(new Task());
+
     @Inject
     private transient PersonService personService;
     @Inject
@@ -48,7 +53,7 @@ public class TaskListPage extends BasePage implements Serializable {
 
 
     public TaskListPage() {
-        // Form for adding new tasks
+
         add(new Link<Void>("redirectToHomePage") {
             @Override
             public void onClick() {
@@ -56,39 +61,9 @@ public class TaskListPage extends BasePage implements Serializable {
             }
         });
 
-        // taskService.testData();
-        taskForm.add(new TextField<>("title"));
-        taskForm.add(new TextArea<>("description"));
-        taskForm.add(new DateTextField("dueDate"));
-        taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
-
-        DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown", Model.of(), projectService.getAllProjects());
-        projectDropDown.setChoiceRenderer(new ProjectChoiceRenderer()); // Create a custom ChoiceRenderer if needed
-
-        DropDownChoice userDropDown = new DropDownChoice("userDropDown", Model.of(), personService.getAllUsers());
-        userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
-
-
-        taskForm.add(userDropDown);
-        taskForm.add(projectDropDown);
-        taskForm.add(new Button("addTaskButton") {
-            @Override
-            public void onSubmit() {
-                Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
-                Project project = (Project) taskForm.get("projectDropDown").getDefaultModel().getObject();
-                Task newTask = taskForm.getModelObject();
-                newTask.setId(UUID.randomUUID());
-                newTask.setPerson(person);
-                newTask.setProject(project);
-                newTask.setStatus(Status.PENDING);
-                System.out.println(newTask);
-                taskService.save(newTask);
-                // taskService.addTask(newTask);
-                taskForm.setModelObject(new Task()); // Reset the form
-                loadActivitiesByStatus();
-            }
-        });
+        taskForm = configureTaskForm();
         add(taskForm);
+        taskModel.setObject(new Task());
 
     }
 
@@ -138,6 +113,100 @@ public class TaskListPage extends BasePage implements Serializable {
         };
         add(priorityList);
 
+    }
+
+
+
+    @Override
+        public void onEvent(IEvent<?> event) {
+        super.onEvent(event);
+
+        if (event.getPayload() instanceof UpdateEvent) {
+            updateTaskFormData((UpdateEvent) event.getPayload());
+        }
+    }
+
+    private void updateTaskFormData(UpdateEvent payload) {
+
+        Task receivedData = payload.getUpdatedData();
+        RequestCycle requestCycle = RequestCycle.get();
+        AjaxRequestTarget ajaxTarget = requestCycle.find(AjaxRequestTarget.class).orElse(null);
+
+        if (ajaxTarget != null) {
+            taskModel.setObject(receivedData);
+            taskForm.get("projectDropDown").setDefaultModelObject(receivedData.getProject());
+            taskForm.get("userDropDown").setDefaultModelObject(receivedData.getPerson());
+
+
+            ajaxTarget.appendJavaScript("showTaskForm();");
+            ajaxTarget.add(taskForm);
+
+        }
+
+    }
+
+
+    private Form configureTaskForm() {
+        this.taskForm = new Form<>("taskForm", new CompoundPropertyModel<>(taskModel));
+        taskForm.add(new TextField<>("title").setOutputMarkupId(true));
+        taskForm.add(new TextArea<>("description"));
+        taskForm.add(new DateTextField("dueDate"));
+        taskForm.add(new DropDownChoice<>("priority", List.of(Priority.HIGH, Priority.MEDIUM, Priority.LOW)));
+
+        taskForm.add(new AjaxEventBehavior("UpdateEvent") {
+            @Override
+            protected void onEvent(AjaxRequestTarget target) {
+                // Call the modifyFormValues() method in response to the custom event
+                taskModel.getObject().setTitle("Modified Title");
+                // You can also perform other actions using Ajax, if needed
+            }
+        });
+
+        DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown", Model.of(), projectService.getAllProjects());
+        projectDropDown.setChoiceRenderer(new ProjectChoiceRenderer()); // Create a custom ChoiceRenderer if needed
+
+        DropDownChoice userDropDown = new DropDownChoice("userDropDown", Model.of(), personService.getAllUsers());
+        userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
+
+
+        taskForm.add(userDropDown);
+        taskForm.add(projectDropDown);
+        taskForm.add(new Button("addTaskButton") {
+            @Override
+            public void onSubmit() {
+                Person person = (Person) taskForm.get("userDropDown").getDefaultModel().getObject();
+                Project project = (Project) taskForm.get("projectDropDown").getDefaultModel().getObject();
+                Task newTask = taskForm.getModelObject();
+                newTask.setPerson(person);
+                newTask.setProject(project);
+
+                if(Objects.isNull(newTask.getId())){
+                    newTask.setStatus(Status.PENDING);
+                    newTask.setId(UUID.randomUUID());
+                    taskService.save(newTask);
+                }
+                else{
+                    taskService.update(newTask);
+                }
+                taskModel.setObject(new Task());// Reset the form
+//                taskForm.get("projectDropDown").setDefaultModelObject(Model.of());
+//                taskForm.get("userDropDown").setDefaultModelObject(Model.of());
+                loadActivitiesByStatus();
+            }
+        });
+
+
+        taskForm.add(new Button("cancelTaskButton") {
+
+            @Override
+            public void onSubmit() {
+                taskModel.setObject(new Task());
+//                taskForm.get("projectDropDown").setDefaultModelObject(Model.of());
+//                taskForm.get("userDropDown").setDefaultModelObject(Model.of());
+            }
+        });
+
+        return taskForm;
     }
 
 }

@@ -4,12 +4,14 @@ import com.equitativa.model.Task;
 import com.equitativa.model.enumerate.Status;
 import com.equitativa.service.TaskService;
 import com.equitativa.util.LocalDateFormatter;
+import com.equitativa.wicket.event.UpdateEvent;
 import com.equitativa.wicket.tasklist.TaskListPage;
 import com.google.inject.Inject;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.event.Broadcast;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.image.ExternalImage;
@@ -60,6 +62,13 @@ public class TaskPanel extends Panel {
                 task.setStatus(statusCompleted.getValue().equals("true") ? Status.COMPLETED : Status.PENDING);
                 findParent(TaskListPage.class).updateTask(task);
                 target.appendJavaScript("window.location.reload();");
+            }
+        });
+
+        add(new AjaxLink<Void>("editButton") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                send(getPage(), Broadcast.BREADTH, new UpdateEvent(taskModel.getObject()));
             }
         });
 

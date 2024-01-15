@@ -21,6 +21,7 @@ import java.util.UUID;
 @Builder
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = true)
 public class Task extends Base {
     @Id
     private UUID id;
@@ -53,16 +54,4 @@ public class Task extends Base {
     private Project project;
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(id, task.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
