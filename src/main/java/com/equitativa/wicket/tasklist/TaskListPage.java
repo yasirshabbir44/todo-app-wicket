@@ -17,10 +17,13 @@ import com.equitativa.wicket.tasklist.renderer.ProjectChoiceRenderer;
 import com.equitativa.wicket.tasklist.renderer.UserChoiceRenderer;
 import com.equitativa.wicket.taskpanel.TaskPanel;
 import com.google.inject.Inject;
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.link.Link;
@@ -66,6 +69,9 @@ public class TaskListPage extends BasePage implements Serializable {
         taskForm = configureTaskForm();
         add(taskForm);
         taskModel.setObject(new Task());
+
+        // Add a behavior to execute JavaScript on page load
+        addListenerOnReload();
 
     }
 
@@ -212,4 +218,15 @@ public class TaskListPage extends BasePage implements Serializable {
         return taskForm;
     }
 
+
+    private void addListenerOnReload() {
+        add(new Behavior() {
+            @Override
+            public void renderHead(Component component, IHeaderResponse response) {
+                super.renderHead(component, response);
+                taskModel.setObject(new Task());
+
+            }
+        });
+    }
 }
