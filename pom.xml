@@ -26,7 +26,7 @@
 	<version>1.0-SNAPSHOT</version>
 		<!-- TODO project name  -->
 	<name>quickstart</name>
-	<description></description>
+	<description/>
 	<!--
 		<organization>
 			<name>company name</name>
@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version> <!-- Check for the latest version on Lombok's website -->
+			<version>1.18.30</version> <!-- Check for the latest version on Lombok's website -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
