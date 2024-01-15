@@ -42,6 +42,8 @@ public class TaskListPage extends BasePage implements Serializable {
     private static final long serialVersionUID = 1L;
     private Form<Task> taskForm;
     private IModel<Task> taskModel = Model.of(new Task());
+    private IModel<Person> personIModel = Model.of();
+    private IModel<Project> projectIModel = Model.of();
 
     @Inject
     private transient PersonService personService;
@@ -162,10 +164,10 @@ public class TaskListPage extends BasePage implements Serializable {
             }
         });
 
-        DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown", Model.of(), projectService.getAllProjects());
+        DropDownChoice<Project> projectDropDown = new DropDownChoice<>("projectDropDown",projectIModel, projectService.getAllProjects());
         projectDropDown.setChoiceRenderer(new ProjectChoiceRenderer()); // Create a custom ChoiceRenderer if needed
 
-        DropDownChoice userDropDown = new DropDownChoice("userDropDown", Model.of(), personService.getAllUsers());
+        DropDownChoice userDropDown = new DropDownChoice("userDropDown", personIModel, personService.getAllUsers());
         userDropDown.setChoiceRenderer(new UserChoiceRenderer()); // Create a custom ChoiceRenderer if needed
 
 
@@ -201,6 +203,7 @@ public class TaskListPage extends BasePage implements Serializable {
             @Override
             public void onSubmit() {
                 taskModel.setObject(new Task());
+                setResponsePage(TaskListPage.class);
 //                taskForm.get("projectDropDown").setDefaultModelObject(Model.of());
 //                taskForm.get("userDropDown").setDefaultModelObject(Model.of());
             }

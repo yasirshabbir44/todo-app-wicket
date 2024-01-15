@@ -1,7 +1,7 @@
 <wicket:extend xmlns:wicket="http://www.w3.org/1999/xhtml">
     <script>
         function showTaskForm() {
-            var myDiv = document.getElementById('taskForm');
+            var myDiv = document.getElementById('taskFormDiv');
             myDiv.style.display = 'block';
 
             var createTaskButton = document.getElementById('createTaskButton');
@@ -17,7 +17,7 @@
             var description = $('#description').val();
 
             if (title && dueDate && priority && description) {
-                var myDiv = document.getElementById('taskForm');
+                var myDiv = document.getElementById('taskFormDiv');
                 myDiv.style.display = 'none';
 
                 var createTaskButton = document.getElementById('createTaskButton');
@@ -27,11 +27,16 @@
         }
 
         function resetTaskButton() {
-            var myDiv = document.getElementById('taskForm');
+            $('#taskForm :input').each(function() {
+                $(this).val('');
+            });
+            var myDiv = document.getElementById('taskFormDiv');
             myDiv.style.display = 'none';
 
             var createTaskButton = document.getElementById('createTaskButton');
             createTaskButton.style.visibility = 'visible';
+
+
 
         }
 
@@ -49,7 +54,7 @@
     </script>
 
     <style>
-        #taskForm {
+        #taskFormDiv {
             display: none;
         }
 
@@ -132,9 +137,9 @@
     <br> <br> <br> <br>
 
 
-    <div class="container-fluid status-activities mt-5 border rounded p-4 bg-light" id="taskForm">
-
-        <form class="mb-3" wicket:id="taskForm">
+    <div class="container-fluid status-activities mt-5 border rounded p-4 bg-light" id="taskFormDiv">
+        <h2 class="mb-4">Task Details</h2>
+        <form class="mb-3" wicket:id="taskForm" id="taskForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="font-weight-bold" for="projectDropDown">Project:</label>
