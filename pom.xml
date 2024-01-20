@@ -26,7 +26,7 @@
 	<version>1.0-SNAPSHOT</version>
 		<!-- TODO project name  -->
 	<name>quickstart</name>
-	<description></description>
+	<description/>
 	<!--
 		<organization>
 			<name>company name</name>
@@ -47,7 +47,7 @@
 		<jetty.plugin.version>11.0.17</jetty.plugin.version>
 		<wicket.version>9.16.0</wicket.version>
 		<jetty9.version>9.4.53.v20231009</jetty9.version>
-		<slf4j.version>2.0.9</slf4j.version>
+		<slf4j.version>2.0.10</slf4j.version>
 		<junit.version>5.10.1</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<wicket.version>10.0.0-M2</wicket.version>
