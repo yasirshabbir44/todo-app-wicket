@@ -26,7 +26,7 @@
 	<version>1.0-SNAPSHOT</version>
 		<!-- TODO project name  -->
 	<name>quickstart</name>
-	<description></description>
+	<description/>
 	<!--
 		<organization>
 			<name>company name</name>
@@ -45,12 +45,12 @@
 		<build.name>DreamHouseRealtyManagement</build.name>
 		<application.port>8080</application.port>
 		<jetty.plugin.version>11.0.17</jetty.plugin.version>
-		<wicket.version>9.16.0</wicket.version>
+		<wicket.version>10.0.0</wicket.version>
 		<jetty9.version>9.4.53.v20231009</jetty9.version>
 		<slf4j.version>2.0.9</slf4j.version>
 		<junit.version>5.10.1</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<wicket.version>10.0.0-M2</wicket.version>
+		<wicket.version>10.0.0</wicket.version>
 		<guice.version>7.0.0</guice.version>
 		<jakarta.servlet.version>6.0.0</jakarta.servlet.version>
 		<hibernate-core-jakarta.version>5.6.15.Final</hibernate-core-jakarta.version>
@@ -126,7 +126,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-core</artifactId>
-			<version>7.0.1</version>
+			<version>7.0.3</version>
 		</dependency>
 
 		<dependency>
